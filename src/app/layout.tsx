@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { siteConfig } from "@/config/site";
+import { getSiteUrl } from "@/lib/seo";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { AmbientBackground } from "@/components/AmbientBackground";
@@ -22,7 +23,12 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// Needs NEXT_PUBLIC_SITE_URL at build time in production; local development falls back to localhost.
+const siteUrl = getSiteUrl() ?? (process.env.NODE_ENV === "development" ? new URL("http://localhost:3000") : undefined);
+
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
+  applicationName: siteConfig.name,
   title: {
     default: `${siteConfig.name} | ${siteConfig.college.name}`,
     template: `%s | ${siteConfig.name}`,
@@ -44,11 +50,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nexops-siet.edu",
     title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
+  twitter: { card: "summary_large_image" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0B1020",
 };
 
 export default function RootLayout({

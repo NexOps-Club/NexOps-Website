@@ -23,6 +23,10 @@ export interface SiteConfig {
     open: boolean;
     label: string;
   };
+  seo: {
+    /** Emit schema.org Event data for upcoming events. Turn off if the listed events are placeholders. */
+    publishEventStructuredData: boolean;
+  };
   nav: {
     title: string;
     href: string;
@@ -38,7 +42,7 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "NexOps",
   shortName: "NexOps",
-  tagline: "Build it. Connect it. Deploy it.",
+  tagline: "Think what’s next. Do what’s best.",
   description:
     "The premier student-led technical society for Cloud Computing, Computer Networking, Systems Engineering, and modern DevOps practices at SIET Tumakuru.",
   college: {
@@ -57,6 +61,8 @@ export const siteConfig: SiteConfig = {
     x: "https://x.com/nexops_siet",
   },
   recruitment: { open: true, label: "Fall Cohort" },
+  // Keep false until the listed events are verified real. The Event JSON-LD builder stays available.
+  seo: { publishEventStructuredData: false },
   nav: [
     { title: "Home", href: "/" },
     { title: "About", href: "/about" },

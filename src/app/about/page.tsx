@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 import { GlassCard } from "@/components/GlassCard";
 import { PageHeader } from "@/components/PageHeader";
 import { siteConfig } from "@/config/site";
 import { ShieldCheck, Terminal, Server, HeartHandshake, ArrowRight } from "lucide-react";
+
+export const metadata: Metadata = pageMetadata({
+  title: "About",
+  description:
+    "Meet NexOps, the student-driven infrastructure community at SIET Tumakuru: our mission, vision and the principles behind how we learn Cloud, Networking and DevOps.",
+  path: "/about",
+  keywords: ["about NexOps", "student DevOps community", "SIET Tumakuru"],
+});
 
 export default function AboutPage() {
   const milestones = [

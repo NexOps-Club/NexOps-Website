@@ -59,6 +59,11 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
+      {
+        // Belt and braces with the metadata in app/admin/layout.tsx. Not access control: the login protects /admin.
+        source: "/admin",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
   turbopack: {

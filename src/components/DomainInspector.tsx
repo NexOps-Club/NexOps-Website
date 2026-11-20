@@ -61,7 +61,7 @@ export function DomainInspector({ selected, onSelect, className = "" }: DomainIn
           <div aria-live="polite" className="min-h-[11rem] space-y-3.5">
             {domain && tone ? (
               <>
-                <h3 className={`text-base font-bold ${tone.label}`}>{domain.name}</h3>
+                <h2 className={`text-base font-bold ${tone.label}`}>{domain.name}</h2>
                 <p className="text-sm text-ink-soft leading-relaxed">{domain.analogy}</p>
                 <div>
                   <p className="text-[11px] font-mono uppercase tracking-wider text-muted">Tools you&apos;ll touch</p>
@@ -80,7 +80,7 @@ export function DomainInspector({ selected, onSelect, className = "" }: DomainIn
               </>
             ) : (
               <>
-                <h3 className="text-base font-bold text-ink">Explore the three domains</h3>
+                <h2 className="text-base font-bold text-ink">Explore the three domains</h2>
                 <p className="text-sm text-ink-soft leading-relaxed">
                   Tap a glowing node in the network, or pick CN, CC or DevOps above, to see what each one
                   means in plain English and what you will build with it.

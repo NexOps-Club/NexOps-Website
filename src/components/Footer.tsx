@@ -31,9 +31,9 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-ink-soft mb-3">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-ink-soft mb-3">
               Navigation
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href="/about" className="hover:text-brand transition-colors">
@@ -65,9 +65,9 @@ export function Footer() {
 
           {/* College & Department */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-ink-soft mb-3">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-ink-soft mb-3">
               Affiliation
-            </h4>
+            </h2>
             <div className="space-y-2 text-xs text-muted">
               <p className="font-medium text-ink-soft">{siteConfig.college.name}</p>
               <p>{siteConfig.college.department}</p>
@@ -80,9 +80,9 @@ export function Footer() {
 
           {/* Connect & Socials */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-ink-soft mb-3">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-ink-soft mb-3">
               Community & Social
-            </h4>
+            </h2>
             <p className="text-xs text-muted mb-3">
               Join student developers and cloud engineers in our discussion spaces.
             </p>
