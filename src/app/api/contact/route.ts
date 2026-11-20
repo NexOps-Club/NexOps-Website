@@ -35,6 +35,13 @@ export async function POST(request: Request) {
     const domain = email.split("@")[1] || "unknown";
     console.log(`[API:Contact] Message received | Subject length: ${subject.length} | Domain: @${domain}`);
 
+    await emailService.notifyInbox({
+      kind: "contact",
+      fromName: name,
+      fromEmail: email,
+      subject,
+      lines: [["Subject", subject], ["Message", message]],
+    });
     await emailService.sendContactAck(email, name, subject);
 
     return NextResponse.json({

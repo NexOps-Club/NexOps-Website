@@ -57,6 +57,25 @@ export async function POST(request: Request) {
     const domain = data.email.split("@")[1] || "unknown";
     console.log(`[API:Join] Application received for track: ${data.track} | Domain: @${domain}`);
 
+    await emailService.notifyInbox({
+      kind: "application",
+      fromName: data.fullName,
+      fromEmail: data.email,
+      subject: `${data.fullName} applied for ${data.track}`,
+      lines: [
+        ["Name", data.fullName],
+        ["Email", data.email],
+        ["Phone", data.phone || "-"],
+        ["Student ID", data.studentId],
+        ["Year", String(data.year)],
+        ["Branch", data.branch],
+        ["Track", data.track],
+        ["Experience", data.experienceLevel],
+        ["GitHub", data.githubUrl || "-"],
+        ["Motivation", data.motivation],
+      ],
+    });
+
     // Trigger confirmation notification
     await emailService.sendApplicationConfirmation(data.email, data.fullName, data.track);
 

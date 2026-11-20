@@ -53,7 +53,7 @@ export const siteConfig: SiteConfig = {
   },
   /** Fill these in with real values. Anything left empty is hidden across the site. */
   contact: {
-    email: "",
+    email: "nexopsclub@gmail.com",
     discord: "",
     whatsapp: "",
     linkedin: "",
