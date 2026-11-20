@@ -83,8 +83,8 @@ export const teamData: TeamMember[] = [
     github: "https://github.com/anusha1234-dot",
   },
   {
-    id: "bhuvanesh",
-    name: "Bhuvanesh",
+    id: "j-bhuvanesh",
+    name: "J Bhuvanesh",
     role: "Member",
     category: "core",
     yearOrDesignation: "NexOps",
