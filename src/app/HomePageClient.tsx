@@ -12,6 +12,7 @@ import { DomainShowcase } from "@/components/DomainShowcase";
 import { ProjectsShowcase } from "@/components/ProjectsShowcase";
 import { Section, SectionHeader } from "@/components/Section";
 import { BentoTile } from "@/components/BentoTile";
+import { Reveal } from "@/components/Reveal";
 import { EventItem } from "@/types";
 import { ArrowRight } from "lucide-react";
 
@@ -57,8 +58,10 @@ export default function HomePage() {
           </div>
         ) : (
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {upcomingEvents.map((event) => (
-              <EventCard key={event.id} event={event} onRegister={(ev) => setSelectedEvent(ev)} />
+            {upcomingEvents.map((event, i) => (
+              <Reveal key={event.id} delay={i * 0.08} fill>
+                <EventCard event={event} onRegister={(ev) => setSelectedEvent(ev)} />
+              </Reveal>
             ))}
           </div>
         )}
@@ -68,6 +71,7 @@ export default function HomePage() {
 
       {/* Join */}
       <Section glow="blue" glowSide="right" labelledBy="join-title">
+        <Reveal>
         <BentoTile tone="dark" gradientBorder className="flex flex-col items-start justify-between gap-8 p-8 sm:p-12 md:flex-row md:items-center">
           <div className="space-y-3">
             <p className="eyebrow text-accent">Open to every branch and year</p>
@@ -89,6 +93,7 @@ export default function HomePage() {
             </Link>
           </div>
         </BentoTile>
+        </Reveal>
       </Section>
 
       {/* Registration modal */}

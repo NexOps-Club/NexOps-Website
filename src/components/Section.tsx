@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode } from "react";
+import { Reveal } from "@/components/Reveal";
 
 interface SectionProps {
   children: ReactNode;
@@ -80,13 +81,13 @@ export function SectionHeader({
   className = "",
 }: SectionHeaderProps) {
   return (
-    <div className={`space-y-3 ${className}`}>
+    <Reveal className={`space-y-3 ${className}`}>
       {command && <div className="cmd-label">{command}</div>}
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <Heading id={id} className="text-3xl sm:text-4xl font-bold text-ink tracking-tight leading-[1.1] text-balance">
         {title}
       </Heading>
       {description && <p className="max-w-[60ch] text-sm sm:text-base text-muted leading-relaxed">{description}</p>}
-    </div>
+    </Reveal>
   );
 }

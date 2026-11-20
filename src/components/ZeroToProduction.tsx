@@ -2,6 +2,7 @@ import { GlassCard } from "@/components/GlassCard";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Section, SectionHeader } from "@/components/Section";
+import { Reveal } from "@/components/Reveal";
 
 const STEPS = [
   {
@@ -41,6 +42,7 @@ export function ZeroToProduction() {
       <ol className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 relative">
         {STEPS.map((step, i) => (
           <li key={step.when} className="relative">
+            <Reveal delay={i * 0.1}>
             <GlassCard title={`~/path/${i + 1}-${step.stage.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
               <div className="p-6 space-y-3">
                 <p className={`text-xs font-mono font-semibold uppercase tracking-wider ${step.tone}`}>{step.when}</p>
@@ -55,6 +57,7 @@ export function ZeroToProduction() {
                 </ul>
               </div>
             </GlassCard>
+            </Reveal>
             {i < STEPS.length - 1 && (
               <ArrowRight
                 aria-hidden="true"

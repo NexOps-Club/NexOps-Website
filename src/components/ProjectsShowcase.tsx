@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BentoTile } from "@/components/BentoTile";
+import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeader } from "@/components/Section";
 import { projectsData } from "@/data/projects";
 
@@ -23,8 +24,9 @@ export function ProjectsShowcase() {
         </div>
       ) : (
       <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
-        {featured.map((p) => (
-          <BentoTile key={p.id} as="article" tone="dark" className="flex flex-col gap-3 p-7">
+        {featured.map((p, i) => (
+          <Reveal key={p.id} delay={i * 0.08} fill>
+          <BentoTile as="article" tone="dark" className="flex flex-col gap-3 p-7">
             <span className="self-start rounded-md border border-line px-2 py-0.5 font-mono text-[11px] text-accent">{p.category}</span>
             <h3 className="text-xl font-bold text-ink">{p.title}</h3>
             <p className="text-sm leading-relaxed text-muted">{p.description}</p>
@@ -36,6 +38,7 @@ export function ProjectsShowcase() {
               ))}
             </div>
           </BentoTile>
+          </Reveal>
         ))}
       </div>
       )}

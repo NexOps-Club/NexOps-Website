@@ -1,6 +1,7 @@
 "use client";
 
 import { BentoTile } from "@/components/BentoTile";
+import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeader } from "@/components/Section";
 import { DOMAINS, type DomainInfo } from "@/data/domains";
 
@@ -27,12 +28,12 @@ export function DomainShowcase({ selected, onSelect }: DomainShowcaseProps) {
         description="The network carries your traffic, the cloud runs your code, and DevOps ships it safely."
       />
       <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
-        {DOMAINS.map((d) => {
+        {DOMAINS.map((d, i) => {
           const tone = TONE[d.tone];
           const active = d.hub === selected;
           return (
+            <Reveal key={d.id} delay={i * 0.08} fill>
             <BentoTile
-              key={d.id}
               as="article"
               className={`flex flex-col gap-4 p-7 ${active ? tone.ring : ""}`}
               tone="dark"
@@ -65,6 +66,7 @@ export function DomainShowcase({ selected, onSelect }: DomainShowcaseProps) {
                 {active ? "Lit in the pipeline" : "Light it up in the pipeline"}
               </button>
             </BentoTile>
+            </Reveal>
           );
         })}
       </div>
