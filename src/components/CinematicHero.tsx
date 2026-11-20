@@ -84,7 +84,7 @@ export function CinematicHero({ selected, onSelect }: CinematicHeroProps) {
 
       {/* Copy */}
       <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[90rem] px-4 pt-14 sm:px-8 lg:px-14 lg:pt-24">
-        <p className="pointer-events-auto font-mono text-xs tracking-[0.08em] text-subtle">{siteConfig.tagline}</p>
+        <p className="pointer-events-auto font-mono text-sm tracking-[0.06em] text-ink-soft sm:text-base lg:text-lg">{siteConfig.tagline}</p>
         <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-[-0.03em] text-ink text-balance sm:text-6xl lg:text-[4.5rem]">
           Engineering
           <br />
