@@ -40,7 +40,7 @@ export function Navbar() {
               preload
               className="h-9 w-[60px] object-contain transition-transform duration-300 group-hover:scale-105"
             />
-            <span className="text-sm font-bold tracking-tight text-ink">{siteConfig.name}</span>
+            <span className="font-heading text-xl font-bold tracking-tight text-ink sm:text-2xl">{siteConfig.name}</span>
           </Link>
 
           {/* Desktop links */}
