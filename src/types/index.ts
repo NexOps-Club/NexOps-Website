@@ -60,22 +60,27 @@ export interface ProjectItem {
 }
 
 export interface RoadmapStep {
+  /** Level title, for example "Level 1: Foundation". */
   title: string;
-  description: string;
+  /** Skill band and phase, for example "BEGINNER · PHASE 01". */
+  stage: string;
   topics: string[];
-  freeResources: {
-    name: string;
-    url: string;
-    type: "Docs" | "Video" | "Lab" | "Book";
-  }[];
+  tools?: string;
+  projects: string[];
+  milestone: string;
+  /** Optional extra line shown under the level heading. */
+  description?: string;
 }
 
 export interface RoadmapItem {
   id: string;
   title: string;
-  duration: string;
-  iconName: string;
-  summary: string;
+  /** Short label for the tab. */
+  tabLabel: string;
+  tagline: string;
+  goal: string;
+  /** Optional advice shown above the levels. */
+  note?: string;
   steps: RoadmapStep[];
 }
 
