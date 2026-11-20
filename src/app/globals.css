@@ -432,6 +432,13 @@
       0 8px 24px -12px rgb(0 0 0 / 0.7);
   }
 
+  /* Mobile menu panel: blurred translucent sheet over the page */
+  .glass-drawer {
+    background: rgb(2 4 10 / 0.78);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(150%);
+  }
+
   /* Bento tile: light by default, add .dark-stage (or use BentoTile tone="dark") for a navy tile */
   .bento-tile {
     position: relative;
@@ -541,6 +548,11 @@
     backdrop-filter: none;
     background: var(--solid-surface);
   }
+  .glass-drawer {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--solid-surface);
+  }
   .bento-tile:hover,
   .bento-tile:focus-within {
     transform: none;
@@ -549,6 +561,8 @@
 
 /* Effects off (set from prefers-reduced-motion): solid surfaces, no blur, no motion */
 html[data-fx="off"] .glass-surface,
+html[data-fx="off"] .glass-pill,
+html[data-fx="off"] .glass-drawer,
 html[data-fx="off"] .glass-card {
   background: var(--solid-surface);
   -webkit-backdrop-filter: none;

@@ -99,7 +99,7 @@ export function CinematicHero({ selected, onSelect }: CinematicHeroProps) {
         </p>
         <Link
           href="#domains"
-          className="pointer-events-auto mt-8 inline-flex items-center gap-2.5 rounded-full bg-[#f4f6fa] px-7 py-3.5 font-mono text-[12.5px] font-medium tracking-[0.08em] text-[#05070b] shadow-[0_0_34px_-6px_rgb(180_230_255/0.45)] transition hover:bg-white hover:shadow-[0_0_44px_-4px_rgb(180_230_255/0.65)]"
+          className="glass-pill pointer-events-auto mt-8 inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 font-mono text-[12.5px] font-medium tracking-[0.08em] text-ink active:scale-[0.97]"
         >
           EXPLORE NEXOPS
           <ArrowRight className="h-4 w-4" aria-hidden="true" />

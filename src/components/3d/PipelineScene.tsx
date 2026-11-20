@@ -65,11 +65,11 @@ const HW = 2.25; // deck half width
 const HH = 0.2; // deck half thickness
 const LUT_N = 700;
 const CUBES = [
-  { t: 0.46, hex: "#3fd0c0", lat: 0.5, s: 0.44, hub: -1 },
-  { t: 0.41, hex: "#5aa0ff", lat: -0.3, s: 0.62, hub: 0 },
-  { t: 0.54, hex: "#22d3ee", lat: 0.2, s: 0.7, hub: 1 },
-  { t: 0.61, hex: "#ffc48a", lat: -0.5, s: 0.44, hub: -1 },
-  { t: 0.69, hex: "#a78bfa", lat: 0.15, s: 0.6, hub: 2 },
+  { t: 0.49, hex: "#3fd0c0", lat: 0.5, s: 0.44, hub: -1 },
+  { t: 0.44, hex: "#5aa0ff", lat: -0.3, s: 0.62, hub: 0 },
+  { t: 0.57, hex: "#22d3ee", lat: 0.2, s: 0.7, hub: 1 },
+  { t: 0.64, hex: "#ffc48a", lat: -0.5, s: 0.44, hub: -1 },
+  { t: 0.71, hex: "#a78bfa", lat: 0.15, s: 0.6, hub: 2 },
 ];
 
 interface Frame {

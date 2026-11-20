@@ -129,7 +129,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex items-center justify-center rounded-lg p-2 text-ink-soft hover:bg-ink/5 hover:text-ink lg:hidden"
+            className="glass-pill inline-flex items-center justify-center rounded-full p-2.5 text-ink-soft hover:text-ink lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
@@ -143,7 +143,7 @@ export function Navbar() {
           <div
             id="mobile-menu"
             className={`border-t border-ink/10 px-3 pt-2 pb-5 lg:hidden ${
-              isHome ? "absolute inset-x-0 top-full border-b border-line bg-canvas px-4 sm:px-8" : ""
+              isHome ? "glass-drawer absolute inset-x-0 top-full border-b border-line px-4 sm:px-8" : ""
             }`}
           >
             <div className="space-y-1">
@@ -155,10 +155,10 @@ export function Navbar() {
                     href={item.href}
                     aria-current={isActive ? "page" : undefined}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`block rounded-lg px-3 py-2 text-base font-medium transition-colors ${
+                    className={`block rounded-full border px-4 py-2 text-base font-medium transition-all duration-200 ${
                       isActive
-                        ? "bg-primary/10 text-brand font-semibold"
-                        : "text-ink-soft hover:bg-ink/5 hover:text-ink"
+                        ? "border-white/25 bg-white/15 text-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.3)]"
+                        : "border-transparent text-ink-soft hover:border-white/15 hover:bg-white/10 hover:text-ink"
                     }`}
                   >
                     {item.title}
@@ -170,7 +170,7 @@ export function Navbar() {
               <Link
                 href="/join"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-on-primary transition hover:bg-primary-hover"
+                className="glass-pill flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-ink active:scale-[0.97]"
               >
                 <span>Join NexOps</span>
                 <ArrowRight className="h-4 w-4" />
@@ -178,7 +178,7 @@ export function Navbar() {
               <Link
                 href="/admin"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-lg border border-ink/10 bg-ink/5 px-4 py-2.5 text-xs font-mono text-ink-soft hover:text-ink"
+                className="glass-pill flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-xs font-mono text-ink-soft hover:text-ink"
               >
                 Admin Control Plane
               </Link>
