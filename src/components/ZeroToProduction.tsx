@@ -1,6 +1,8 @@
 import { GlassCard } from "@/components/GlassCard";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Section, SectionHeader } from "@/components/Section";
+import { VERIFIED } from "@/lib/verified";
 
 const STEPS = [
   {
@@ -18,23 +20,24 @@ const STEPS = [
   {
     when: "Semester Goal",
     stage: "Production",
-    items: ["Automated CI/CD pipelines", "Monitoring dashboards", "Contributing to the club homelab"],
+    items: [
+      "Automated CI/CD pipelines",
+      "Monitoring dashboards",
+      VERIFIED.homelab ? "Contributing to the club homelab" : "Contributing to club projects",
+    ],
     tone: "text-accent-2",
   },
 ];
 
 export function ZeroToProduction() {
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-      <div className="text-center max-w-2xl mx-auto space-y-3">
-        <span className="text-xs font-mono font-semibold uppercase tracking-wider text-brand">
-          Zero to Production
-        </span>
-        <h2 className="text-2xl sm:text-4xl font-extrabold text-ink">From first command to live deploy</h2>
-        <p className="text-xs sm:text-sm text-muted">
-          No prior cloud experience needed. Here is the path most members follow in their first semester.
-        </p>
-      </div>
+    <Section labelledBy="roadmap-title">
+      <SectionHeader
+        id="roadmap-title"
+        command="cat roadmap.md"
+        title="From first command to live deploy"
+        description="No prior cloud experience needed. Here is the path most members follow in their first semester."
+      />
 
       <ol className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 relative">
         {STEPS.map((step, i) => (
@@ -68,6 +71,6 @@ export function ZeroToProduction() {
           See the full learning roadmaps &rarr;
         </Link>
       </div>
-    </section>
+    </Section>
   );
 }

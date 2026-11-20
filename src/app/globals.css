@@ -83,9 +83,20 @@
   --focus-ring: #60a5fa;
 }
 
+/* Near-black cinematic variant of the dark stage (homepage, footer). Declared after .dark-stage so it wins. */
+.cinema {
+  --canvas: #02040a;
+  --surface: #0a0f1a;
+  --sunken: #101827;
+  --line: rgb(248 250 252 / 0.1);
+  --glass-card-bg: linear-gradient(180deg, rgb(255 255 255 / 0.04), rgb(255 255 255 / 0.01)), rgb(10 15 26 / 0.92);
+  --solid-surface: rgb(10 15 26 / 0.96);
+}
+
 /* In the base layer so utilities such as bg-transparent can still override it */
 @layer base {
-  .dark-stage {
+  .dark-stage,
+  .cinema {
     background: var(--canvas);
     color: var(--ink);
   }
@@ -473,6 +484,13 @@
     border-left: 0;
     border-top: 0;
   }
+}
+
+/* Fine film grain over the dark 3D hero; hides banding in smooth glow gradients */
+.film-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.045;
+  mix-blend-mode: screen;
 }
 
 /* ---------- Fallbacks ---------- */

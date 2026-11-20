@@ -3,10 +3,11 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, DiscordIcon } from "@/components/Icons";
+import { VERIFIED } from "@/lib/verified";
 
 export function Footer() {
   return (
-    <footer className="dark-stage w-full border-t border-line bg-canvas text-muted">
+    <footer className="dark-stage cinema w-full border-t border-line bg-canvas text-muted">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand & Mission */}
@@ -18,15 +19,6 @@ export function Footer() {
             <p className="text-xs text-muted leading-relaxed">
               {siteConfig.description}
             </p>
-            <div className="pt-1">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-brand">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-                <span>All Systems Operational</span>
-              </div>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -72,9 +64,9 @@ export function Footer() {
               <p className="font-medium text-ink-soft">{siteConfig.college.name}</p>
               <p>{siteConfig.college.department}</p>
               <p>{siteConfig.college.campus}</p>
-              <p className="pt-2 text-[11px] text-muted">
-                An officially recognized student technical society.
-              </p>
+              {VERIFIED.footerClaims && (
+                <p className="pt-2 text-[11px] text-muted">An officially recognized student technical society.</p>
+              )}
             </div>
           </div>
 
@@ -86,7 +78,9 @@ export function Footer() {
             <p className="text-xs text-muted mb-3">
               Join student developers and cloud engineers in our discussion spaces.
             </p>
+            {(VERIFIED.socialLinks || VERIFIED.contactEmail) && (
             <div className="flex items-center gap-3">
+              {VERIFIED.socialLinks && (<>
               <a
                 href={siteConfig.contact.github}
                 target="_blank"
@@ -114,6 +108,8 @@ export function Footer() {
               >
                 <LinkedinIcon className="h-4 w-4" />
               </a>
+              </>)}
+              {VERIFIED.contactEmail && (
               <a
                 href={`mailto:${siteConfig.contact.email}`}
                 className="rounded-lg border border-line bg-surface p-2 text-ink-soft hover:border-line-strong hover:text-ink transition"
@@ -121,7 +117,9 @@ export function Footer() {
               >
                 <Mail className="h-4 w-4" />
               </a>
+              )}
             </div>
+            )}
             <div className="mt-4">
               <Link
                 href="/join"
@@ -136,7 +134,9 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-10 border-t border-line pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-muted gap-4">
-          <p>© {new Date().getFullYear()} {siteConfig.name}. Open-source under MIT License.</p>
+          <p>
+            © {new Date().getFullYear()} {siteConfig.name}.{VERIFIED.footerClaims && " Open-source under MIT License."}
+          </p>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {siteConfig.recruitment.open && (
               <Link
@@ -147,6 +147,7 @@ export function Footer() {
                 <span>Recruiting: {siteConfig.recruitment.label}</span>
               </Link>
             )}
+            {VERIFIED.footerClaims && (
             <a
               href={`${siteConfig.contact.github}/blob/main/.github/workflows/ci.yml`}
               target="_blank"
@@ -156,6 +157,7 @@ export function Footer() {
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand" />
               <span>Tested &amp; Docker-built by our own CI pipeline | View pipeline</span>
             </a>
+            )}
           </div>
         </div>
       </div>

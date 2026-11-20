@@ -16,18 +16,32 @@ export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrolled = useSyncExternalStore(subscribeScroll, () => window.scrollY > 16, () => false);
+  // The homepage uses a minimal bar over the black hero; inner pages keep the floating pill.
+  const isHome = pathname === "/";
 
   return (
     // Fixed-height header: the pill shrinks inside it, so scrolling never shifts the page.
-    <header className="dark-stage sticky top-0 z-50 h-20 bg-transparent w-full px-3 pt-3 sm:px-4">
+    <header
+      className={
+        isHome
+          ? `dark-stage cinema sticky top-0 z-50 h-20 w-full px-4 transition-colors duration-300 sm:px-8 lg:px-14 ${
+              scrolled ? "border-b border-line bg-canvas/85 backdrop-blur-md" : "border-b border-transparent bg-canvas"
+            }`
+          : "dark-stage sticky top-0 z-50 h-20 bg-transparent w-full px-3 pt-3 sm:px-4"
+      }
+    >
       <div
-        className={`glass-surface mx-auto rounded-2xl transition-[max-width,box-shadow] duration-300 ${
-          scrolled ? "max-w-[76rem] shadow-2xl shadow-black/50" : "max-w-7xl"
-        }`}
+        className={
+          isHome
+            ? "mx-auto max-w-[90rem]"
+            : `glass-surface mx-auto rounded-2xl transition-[max-width,box-shadow] duration-300 ${
+                scrolled ? "max-w-[76rem] shadow-2xl shadow-black/50" : "max-w-7xl"
+              }`
+        }
       >
         <div
-          className={`flex items-center justify-between px-3 sm:px-5 transition-[height] duration-300 ${
-            scrolled ? "h-14" : "h-16"
+          className={`flex items-center justify-between ${
+            isHome ? "h-20" : `px-3 sm:px-5 transition-[height] duration-300 ${scrolled ? "h-14" : "h-16"}`
           }`}
         >
           {/* Brand Logo */}
@@ -45,27 +59,39 @@ export function Navbar() {
             <div className="flex flex-col">
               <span className="font-bold text-sm tracking-tight text-ink flex items-center gap-1.5">
                 {siteConfig.name}
-                <span className="inline-flex items-center rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-mono text-brand border border-primary/30">
-                  SIET
-                </span>
+                {!isHome && (
+                  <span className="inline-flex items-center rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-mono text-brand border border-primary/30">
+                    SIET
+                  </span>
+                )}
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5" aria-label="Main">
-            {siteConfig.nav.map((item) => {
+          <nav className={`hidden lg:flex items-center ${isHome ? "gap-7 xl:gap-9" : "gap-1 xl:gap-1.5"}`} aria-label="Main">
+            {siteConfig.nav
+              .filter((item) => !(isHome && item.href === "/resources"))
+              .map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`whitespace-nowrap px-2.5 xl:px-3 py-1.5 text-sm font-medium rounded-full transition-all ${
-                    isActive
-                      ? "text-brand bg-primary/10 border border-primary/30"
-                      : "text-ink-soft border border-transparent hover:text-ink hover:bg-ink/5"
-                  }`}
+                  className={
+                    isHome
+                      ? `whitespace-nowrap border-b py-1 text-sm transition-colors ${
+                          isActive
+                            ? "border-ink/60 text-ink"
+                            : "border-transparent text-ink-soft hover:text-ink"
+                        }`
+                      : `whitespace-nowrap px-2.5 xl:px-3 py-1.5 text-sm font-medium rounded-full transition-all ${
+                          isActive
+                            ? "text-brand bg-primary/10 border border-primary/30"
+                            : "text-ink-soft border border-transparent hover:text-ink hover:bg-ink/5"
+                        }`
+                  }
                 >
                   {item.title}
                 </Link>
@@ -75,12 +101,24 @@ export function Navbar() {
 
           {/* Join CTA */}
           <div className="hidden lg:flex items-center gap-2.5">
+            {isHome && (
+              <Link
+                href="/resources"
+                className="inline-flex items-center whitespace-nowrap rounded-full border border-line-strong bg-canvas/60 px-5 py-2 text-sm text-ink transition hover:border-ink/50 hover:bg-ink/10"
+              >
+                Roadmaps
+              </Link>
+            )}
             <Link
               href="/join"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-4 py-2 text-xs lg:text-sm font-semibold text-on-primary transition hover:bg-primary-hover active:scale-95 shadow-md shadow-primary/20"
+              className={
+                isHome
+                  ? "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-line-strong bg-canvas/60 px-5 py-2 text-sm text-ink transition hover:border-ink/50 hover:bg-ink/10"
+                  : "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-4 py-2 text-xs lg:text-sm font-semibold text-on-primary transition hover:bg-primary-hover active:scale-95 shadow-md shadow-primary/20"
+              }
             >
               <span>Join NexOps</span>
-              <ArrowRight className="h-4 w-4" />
+              {!isHome && <ArrowRight className="h-4 w-4" />}
             </Link>
           </div>
 
@@ -99,7 +137,12 @@ export function Navbar() {
 
         {/* Mobile Drawer (inside the pill, overlays the page) */}
         {mobileMenuOpen && (
-          <div id="mobile-menu" className="border-t border-ink/10 px-3 pt-2 pb-5 lg:hidden">
+          <div
+            id="mobile-menu"
+            className={`border-t border-ink/10 px-3 pt-2 pb-5 lg:hidden ${
+              isHome ? "absolute inset-x-0 top-full border-b border-line bg-canvas px-4 sm:px-8" : ""
+            }`}
+          >
             <div className="space-y-1">
               {siteConfig.nav.map((item) => {
                 const isActive = pathname === item.href;
