@@ -56,6 +56,15 @@ export default function TeamPage() {
       ? teamData
       : teamData.filter((member) => member.category === filter);
 
+  // Everyone view: mentor and team lead first, then the members.
+  const groups: { title: string | null; list: typeof teamData }[] =
+    filter === "all"
+      ? [
+          { title: "Mentor & Team Lead", list: teamData.filter((m) => m.category === "faculty" || m.category === "leads") },
+          { title: "Members", list: teamData.filter((m) => m.category === "core") },
+        ].filter((g) => g.list.length > 0)
+      : [{ title: null, list: filteredMembers }];
+
   const categories: CategoryOption[] = [
     { label: "Everyone", value: "all" },
     { label: "Faculty Coordinators", value: "faculty" },
@@ -108,8 +117,11 @@ export default function TeamPage() {
           }
         />
       )}
+      {groups.map((group) => (
+      <section key={group.title ?? "list"} className="space-y-5" aria-label={group.title ?? undefined}>
+      {group.title && <div className="cmd-label">{group.title}</div>}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredMembers.map((member) => (
+        {group.list.map((member) => (
           <GlassCard key={member.id} title={`~/team/${member.id}`}>
             {/* Member Photo */}
             <div className="relative h-56 w-full overflow-hidden bg-canvas">
@@ -191,6 +203,8 @@ export default function TeamPage() {
           </GlassCard>
         ))}
       </div>
+      </section>
+      ))}
 
       {/* Recruitment Callout Banner */}
       <div className="panel p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
