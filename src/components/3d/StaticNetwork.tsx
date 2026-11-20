@@ -12,7 +12,7 @@ const W = 800;
 const H = 600;
 const ROT_X = VIEW.tiltX;
 const ROT_Y = VIEW.swingY * 0.6;
-const TONE_HEX = { emerald: "#a5b4fc", cyan: "#ff8a5b", violet: "#5eead4" } as const;
+const TONE_HEX = { blue: "#3b82f6", cyan: "#06b6d4", violet: "#8b5cf6" } as const;
 const TRAIL_LAGS = [0, 0.14, 0.28];
 
 const focal = H / 2 / Math.tan((VIEW.fov * Math.PI) / 360);
@@ -99,7 +99,7 @@ export function StaticNetwork({
       {projected.map((n, i) => (
         <g key={i} opacity={n.fade}>
           <circle cx={n.x} cy={n.y} r={round(n.radius * n.scale * 3)} fill={`url(#${glowId(n.tone)})`} />
-          <circle cx={n.x} cy={n.y} r={round(n.radius * n.scale)} fill={n.hub ? "#e0e7ff" : TONE_HEX[n.tone]} />
+          <circle cx={n.x} cy={n.y} r={round(n.radius * n.scale)} fill={n.hub ? "#dbeafe" : TONE_HEX[n.tone]} />
         </g>
       ))}
       {anchors && (
@@ -110,7 +110,7 @@ export function StaticNetwork({
               const to = projected[DOMAINS[(i + 1) % DOMAINS.length].hub];
               const path = `M${from.x} ${from.y} L${to.x} ${to.y}`;
               return TRAIL_LAGS.map((lag, k) => (
-                <circle key={`${d.id}-${k}`} r={4 - k} fill="#eef2ff" opacity={1 - k * 0.3}>
+                <circle key={`${d.id}-${k}`} r={4 - k} fill="#e0f2fe" opacity={1 - k * 0.3}>
                   <animateMotion dur="2.8s" begin={`${-lag * 2.8 - i * 0.9}s`} repeatCount="indefinite" path={path} />
                 </circle>
               ));
@@ -148,7 +148,7 @@ export function StaticNetwork({
                   cx={n.x}
                   cy={n.y}
                   r={active ? 15 : 11}
-                  fill="#0f0c24"
+                  fill="#0b1020"
                   stroke={hex}
                   strokeWidth={active ? 4 : 2.5}
                 />
@@ -158,9 +158,9 @@ export function StaticNetwork({
                   y={n.y + 38}
                   textAnchor="middle"
                   fontSize={26}
-                  fontFamily="var(--font-geist-mono), monospace"
+                  fontFamily="var(--font-jetbrains-mono), monospace"
                   fontWeight={active ? 700 : 500}
-                  fill={active ? "#ffffff" : "#d4d4d8"}
+                  fill={active ? "#ffffff" : "#aab4cc"}
                 >
                   {d.short}
                 </text>

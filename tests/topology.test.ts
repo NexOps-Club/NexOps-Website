@@ -24,7 +24,7 @@ describe("Hero network topology", () => {
     for (const node of topo.nodes.filter((n) => !n.hub)) {
       assert.ok(node.radius >= NODE_RADIUS_MIN && node.radius <= NODE_RADIUS_MAX);
     }
-    assert.deepStrictEqual(new Set(topo.nodes.map((n) => n.tone)), new Set(["emerald", "cyan", "violet"]));
+    assert.deepStrictEqual(new Set(topo.nodes.map((n) => n.tone)), new Set(["blue", "cyan", "violet"]));
     // Workers share the tone of the hub they cluster around.
     topo.nodes.forEach((n, i) => assert.strictEqual(n.tone, topo.nodes[i % 3].tone));
   });

@@ -81,20 +81,20 @@ export function StatTiles() {
         return (
           <div key={stat.id} className="glass-card rounded-2xl p-5 sm:p-6 space-y-1.5">
             <div className="flex items-center justify-between gap-2">
-              <p className="text-3xl sm:text-4xl font-extrabold tabular-nums text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+              <p className="text-3xl sm:text-4xl font-extrabold tabular-nums text-transparent bg-clip-text bg-gradient-to-r from-brand to-accent">
                 <span aria-hidden="true">{shown[stat.id] ?? "—"}</span>
                 <span className="sr-only">{value ?? (liveFailed ? "not available" : "loading")}</span>
               </p>
               {live && (
                 <span
-                  className="pulse-dot h-2 w-2 shrink-0 rounded-full bg-emerald-400"
+                  className="pulse-dot h-2 w-2 shrink-0 rounded-full bg-accent"
                   title="Live count"
                   aria-hidden="true"
                 />
               )}
             </div>
-            <p className="text-xs sm:text-sm font-bold text-zinc-100">{stat.label}</p>
-            <p className="text-[11px] text-zinc-400 hidden sm:block">{stat.description}</p>
+            <p className="text-xs sm:text-sm font-bold text-ink">{stat.label}</p>
+            <p className="text-[11px] text-muted hidden sm:block">{stat.description}</p>
           </div>
         );
       })}

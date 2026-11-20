@@ -11,20 +11,20 @@ interface DomainInspectorProps {
 }
 
 const TONE_CLASS: Record<DomainInfo["tone"], { active: string; chip: string; label: string }> = {
-  emerald: {
-    active: "border-emerald-400/60 bg-emerald-500/15 text-emerald-300",
-    chip: "border-emerald-500/25 bg-emerald-500/10 text-emerald-300",
-    label: "text-emerald-400",
+  blue: {
+    active: "border-primary/60 bg-primary/15 text-brand",
+    chip: "border-primary/25 bg-primary/10 text-brand",
+    label: "text-brand",
   },
   cyan: {
-    active: "border-cyan-400/60 bg-cyan-500/15 text-cyan-300",
-    chip: "border-cyan-500/25 bg-cyan-500/10 text-cyan-300",
-    label: "text-cyan-400",
+    active: "border-accent/60 bg-accent/15 text-accent",
+    chip: "border-accent/25 bg-accent/10 text-accent",
+    label: "text-accent",
   },
   violet: {
-    active: "border-violet-400/60 bg-violet-500/15 text-violet-300",
-    chip: "border-violet-500/25 bg-violet-500/10 text-violet-300",
-    label: "text-violet-400",
+    active: "border-accent-2/60 bg-accent-2/15 text-accent-2",
+    chip: "border-accent-2/25 bg-accent-2/10 text-accent-2",
+    label: "text-accent-2",
   },
 };
 
@@ -49,7 +49,7 @@ export function DomainInspector({ selected, onSelect, className = "" }: DomainIn
                   className={`flex-1 rounded-lg border px-2 py-2 text-xs font-mono font-semibold transition ${
                     active
                       ? TONE_CLASS[d.tone].active
-                      : "border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10 hover:text-white"
+                      : "border-ink/10 bg-ink/5 text-ink-soft hover:bg-ink/10 hover:text-ink"
                   }`}
                 >
                   {d.short}
@@ -62,9 +62,9 @@ export function DomainInspector({ selected, onSelect, className = "" }: DomainIn
             {domain && tone ? (
               <>
                 <h3 className={`text-base font-bold ${tone.label}`}>{domain.name}</h3>
-                <p className="text-sm text-zinc-200 leading-relaxed">{domain.analogy}</p>
+                <p className="text-sm text-ink-soft leading-relaxed">{domain.analogy}</p>
                 <div>
-                  <p className="text-[11px] font-mono uppercase tracking-wider text-zinc-400">Tools you&apos;ll touch</p>
+                  <p className="text-[11px] font-mono uppercase tracking-wider text-muted">Tools you&apos;ll touch</p>
                   <div className="mt-1.5 flex flex-wrap gap-1.5">
                     {domain.tools.map((t) => (
                       <span key={t} className={`rounded border px-2 py-0.5 text-[11px] font-mono ${tone.chip}`}>
@@ -74,18 +74,18 @@ export function DomainInspector({ selected, onSelect, className = "" }: DomainIn
                   </div>
                 </div>
                 <div>
-                  <p className="text-[11px] font-mono uppercase tracking-wider text-zinc-400">What you&apos;ll build</p>
-                  <p className="mt-1 text-xs text-zinc-300 leading-relaxed">{domain.build}</p>
+                  <p className="text-[11px] font-mono uppercase tracking-wider text-muted">What you&apos;ll build</p>
+                  <p className="mt-1 text-xs text-ink-soft leading-relaxed">{domain.build}</p>
                 </div>
               </>
             ) : (
               <>
-                <h3 className="text-base font-bold text-zinc-100">Explore the three domains</h3>
-                <p className="text-sm text-zinc-300 leading-relaxed">
+                <h3 className="text-base font-bold text-ink">Explore the three domains</h3>
+                <p className="text-sm text-ink-soft leading-relaxed">
                   Tap a glowing node in the network, or pick CN, CC or DevOps above, to see what each one
                   means in plain English and what you will build with it.
                 </p>
-                <p className="text-xs text-zinc-400 leading-relaxed">
+                <p className="text-xs text-muted leading-relaxed">
                   Packets flow CN to CC to DevOps: the network carries your traffic, the cloud runs your
                   code, and DevOps ships it safely.
                 </p>

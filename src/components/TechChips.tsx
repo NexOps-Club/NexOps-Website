@@ -18,10 +18,10 @@ export function TechChips() {
       {stack.map(({ name, icon: Icon }, i) => (
         <li
           key={name}
-          className="float-chip inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[11px] font-mono text-zinc-200 shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] hover:border-emerald-400/40"
+          className="float-chip inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-ink/[0.05] px-3 py-1.5 text-[11px] font-mono text-ink-soft shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] hover:border-primary/40"
           style={{ "--i": i, "--depth": 2 + (i % 3) * 2 } as React.CSSProperties}
         >
-          <Icon className="h-3.5 w-3.5 text-emerald-400" aria-hidden="true" />
+          <Icon className="h-3.5 w-3.5 text-brand" aria-hidden="true" />
           {name}
         </li>
       ))}

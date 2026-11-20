@@ -46,12 +46,12 @@ export function GlassCard({ title, children, className = "" }: GlassCardProps) {
     >
       <div
         aria-hidden="true"
-        className="flex items-center gap-1.5 border-b border-white/[0.06] bg-white/[0.02] px-3.5 py-2"
+        className="flex items-center gap-1.5 border-b border-ink/[0.06] bg-ink/[0.02] px-3.5 py-2"
       >
-        <span className="h-2 w-2 rounded-full bg-rose-500/70" />
+        <span className="h-2 w-2 rounded-full bg-danger/70" />
         <span className="h-2 w-2 rounded-full bg-amber-500/70" />
-        <span className="h-2 w-2 rounded-full bg-emerald-500/70" />
-        <span className="ml-1.5 truncate font-mono text-[10px] text-zinc-400">{title}</span>
+        <span className="h-2 w-2 rounded-full bg-primary/70" />
+        <span className="ml-1.5 truncate font-mono text-[10px] text-muted">{title}</span>
       </div>
       {children}
     </div>

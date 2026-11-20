@@ -36,17 +36,17 @@ export function LevelFilter({ value, onChange, className = "" }: LevelFilterProp
               onClick={() => onChange(o.id)}
               className={`rounded-lg px-3 py-2 text-left sm:text-center text-xs transition ${
                 on
-                  ? "bg-emerald-500 text-zinc-950 font-semibold shadow-sm"
-                  : "text-zinc-300 hover:bg-white/10 hover:text-white"
+                  ? "bg-primary text-on-primary font-semibold shadow-sm"
+                  : "text-ink-soft hover:bg-ink/10 hover:text-ink"
               }`}
             >
-              <span className={`font-mono ${on ? "text-zinc-800" : "text-emerald-400"}`}>{o.index}{" // "}</span>
+              <span className={`font-mono ${on ? "text-on-primary" : "text-brand"}`}>{o.index}{" // "}</span>
               {o.label}
             </button>
           );
         })}
       </div>
-      <p aria-live="polite" className="mt-2 text-center text-[11px] font-mono text-zinc-400">
+      <p aria-live="polite" className="mt-2 text-center text-[11px] font-mono text-muted">
         {active?.hint}
       </p>
     </div>

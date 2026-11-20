@@ -1,10 +1,10 @@
 // Deterministic hub-and-spoke network layout shared by the WebGL scene and the static SVG fallback.
 // Pure data only (no three.js) so it stays cheap to import and easy to unit test.
 
-export type Tone = "emerald" | "cyan" | "violet";
+export type Tone = "blue" | "cyan" | "violet";
 
 /** One tone per hub; hubs are the three domain anchors (CN, CC, DevOps). Workers inherit their hub's tone. */
-export const HUB_TONES: Tone[] = ["emerald", "cyan", "violet"];
+export const HUB_TONES: Tone[] = ["blue", "cyan", "violet"];
 
 export interface TopologyNode {
   x: number;

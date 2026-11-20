@@ -41,12 +41,12 @@ export interface InteractionState {
 }
 
 const TONES: Record<Tone, Color> = {
-  emerald: new Color("#a5b4fc"),
-  cyan: new Color("#ff8a5b"),
-  violet: new Color("#5eead4"),
+  blue: new Color("#3b82f6"),
+  cyan: new Color("#06b6d4"),
+  violet: new Color("#8b5cf6"),
 };
 const WHITE = new Color("#ffffff");
-const BG = "#0f0c24";
+const BG = "#0b1020";
 const FOG_NEAR = VIEW.cameraZ - 0.5;
 const FOG_FAR = VIEW.cameraZ + 4.5;
 const PACKET_COUNT = 12;
@@ -168,7 +168,7 @@ function createNetworkScene() {
   const packetGeometry = new BufferGeometry();
   const packetPos = new Float32Array(TOTAL_PACKETS * 3);
   const packetColor = new Float32Array(TOTAL_PACKETS * 3).fill(1);
-  for (let i = 0; i < PACKET_COUNT; i++) packetColor.set([0.9, 0.92, 1], i * 3);
+  for (let i = 0; i < PACKET_COUNT; i++) packetColor.set([0.88, 0.94, 1], i * 3);
   const packetSize = new Float32Array(TOTAL_PACKETS).fill(0.16);
   const packetPosAttr = new BufferAttribute(packetPos, 3);
   packetGeometry.setAttribute("position", packetPosAttr);

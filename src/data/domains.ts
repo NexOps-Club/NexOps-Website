@@ -20,7 +20,7 @@ export const DOMAINS: DomainInfo[] = [
     hub: 0,
     short: "CN",
     name: "Computer Networks",
-    tone: "emerald",
+    tone: "blue",
     analogy: "The plumbing and traffic rules of the internet: how data travels from your phone to a server across the globe.",
     tools: ["Wireshark", "Linux iptables", "BGP", "DNS"],
     build: "Configure a multi-VLAN lab network from scratch.",
