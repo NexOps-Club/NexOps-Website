@@ -4,12 +4,12 @@ import { TeamMember } from "@/types";
 export const teamData: TeamMember[] = [
   {
     id: "dr-girish",
-    name: "Dr. Girish",
+    name: "Dr. Girish L",
     role: "Faculty Mentor",
     category: "faculty",
     yearOrDesignation: "Associate Professor, HOD of AI&DS and AI&ML",
     bio: "",
-    photoUrl: "/team/dr-girish.jpg",
+    photoUrl: "/team/dr-girish-l.jpg",
     github: "https://github.com/girishl",
   },
   {
