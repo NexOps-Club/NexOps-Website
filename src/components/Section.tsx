@@ -6,14 +6,47 @@ interface SectionProps {
   className?: string;
   /** Adds the faint blueprint grid behind the top of the section. */
   grid?: boolean;
+  /** Soft coloured light behind the section so each part of the page has its own atmosphere. */
+  glow?: "blue" | "cyan" | "violet";
+  glowSide?: "left" | "right";
+  /** Slightly lighter band with hairlines, to separate it from its neighbours. */
+  band?: boolean;
   /** Accessible name when the section has no visible heading id to point at. */
   labelledBy?: string;
 }
 
 /** Light content section with the standard width, gutters and vertical rhythm. */
-export function Section({ children, id, className = "", grid = false, labelledBy }: SectionProps) {
+const GLOW: Record<NonNullable<SectionProps["glow"]>, string> = {
+  blue: "37 99 235",
+  cyan: "6 182 212",
+  violet: "139 92 246",
+};
+
+export function Section({
+  children,
+  id,
+  className = "",
+  grid = false,
+  glow,
+  glowSide = "right",
+  band = false,
+  labelledBy,
+}: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={`relative ${className}`}>
+    <section
+      id={id}
+      aria-labelledby={labelledBy}
+      className={`relative overflow-hidden ${band ? "border-y border-line bg-sunken/40" : ""} ${className}`}
+    >
+      {glow && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: `radial-gradient(48% 60% at ${glowSide === "right" ? "90%" : "10%"} 20%, rgb(${GLOW[glow]} / 0.16), rgb(${GLOW[glow]} / 0.05) 55%, transparent 80%)`,
+          }}
+        />
+      )}
       {grid && (
         <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[560px] overflow-hidden">
           <div className="blueprint-grid" />

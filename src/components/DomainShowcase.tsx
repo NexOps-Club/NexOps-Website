@@ -19,7 +19,7 @@ interface DomainShowcaseProps {
 /** Three domain tiles. Selecting one also lights its node in the hero. */
 export function DomainShowcase({ selected, onSelect }: DomainShowcaseProps) {
   return (
-    <Section id="domains" grid labelledBy="domains-title">
+    <Section id="domains" grid glow="cyan" glowSide="right" labelledBy="domains-title">
       <SectionHeader
         id="domains-title"
         command="ls domains/"

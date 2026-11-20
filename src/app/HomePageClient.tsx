@@ -31,7 +31,7 @@ export default function HomePage() {
       <ZeroToProduction />
 
       {/* Upcoming events */}
-      <Section labelledBy="events-title">
+      <Section glow="violet" glowSide="right" labelledBy="events-title">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <SectionHeader id="events-title" className="flex-1 self-stretch" command="ls events/ --upcoming" title="Workshops, talks and CTFs" />
           <Link href="/events" className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition hover:text-ink">
@@ -65,7 +65,7 @@ export default function HomePage() {
       <ProjectsShowcase />
 
       {/* Join */}
-      <Section labelledBy="join-title">
+      <Section glow="blue" glowSide="right" labelledBy="join-title">
         <BentoTile tone="dark" gradientBorder className="flex flex-col items-start justify-between gap-8 p-8 sm:p-12 md:flex-row md:items-center">
           <div className="space-y-3">
             <p className="eyebrow text-accent">Open to every branch and year</p>

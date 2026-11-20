@@ -31,7 +31,7 @@ const STEPS = [
 
 export function ZeroToProduction() {
   return (
-    <Section labelledBy="roadmap-title">
+    <Section band glow="blue" glowSide="left" labelledBy="roadmap-title">
       <SectionHeader
         id="roadmap-title"
         command="cat roadmap.md"

@@ -12,7 +12,7 @@ import { VERIFIED } from "@/lib/verified";
 export function ProjectsShowcase() {
   const featured = projectsData.filter((p) => p.featured).slice(0, 3);
   return (
-    <Section labelledBy="projects-title">
+    <Section band glow="cyan" glowSide="left" labelledBy="projects-title">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
         <SectionHeader id="projects-title" className="flex-1 self-stretch" command="git log --projects" title="Production tools and labs" />
         <Link href="/projects" className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition hover:text-ink">
