@@ -10,13 +10,6 @@ import { GithubIcon, LinkedinIcon } from "@/components/Icons";
 import Link from "next/link";
 import { GlassCard } from "@/components/GlassCard";
 
-type CategoryFilter = "all" | "faculty" | "leads" | "core";
-
-interface CategoryOption {
-  label: string;
-  value: CategoryFilter;
-}
-
 /** Member photo with an initials fallback if the remote image fails to load. */
 function MemberPhoto({ src, name }: { src: string; name: string }) {
   const [failed, setFailed] = useState(false);
@@ -49,28 +42,11 @@ function MemberPhoto({ src, name }: { src: string; name: string }) {
 }
 
 export default function TeamPage() {
-  const [filter, setFilter] = useState<CategoryFilter>("all");
-
-  const filteredMembers =
-    filter === "all"
-      ? teamData
-      : teamData.filter((member) => member.category === filter);
-
-  // Everyone view: mentor and team lead first, then the members.
-  const groups: { title: string | null; list: typeof teamData }[] =
-    filter === "all"
-      ? [
-          { title: "Mentor & Team Lead", list: teamData.filter((m) => m.category === "faculty" || m.category === "leads") },
-          { title: "Members", list: teamData.filter((m) => m.category === "core") },
-        ].filter((g) => g.list.length > 0)
-      : [{ title: null, list: filteredMembers }];
-
-  const categories: CategoryOption[] = [
-    { label: "Everyone", value: "all" },
-    { label: "Faculty Coordinators", value: "faculty" },
-    { label: "Student Leads", value: "leads" },
-    { label: "Core Committee", value: "core" },
-  ];
+  // Mentor and team lead first, then the members.
+  const groups = [
+    { title: "Mentor & Team Lead", list: teamData.filter((m) => m.category === "faculty" || m.category === "leads") },
+    { title: "Members", list: teamData.filter((m) => m.category === "core") },
+  ].filter((g) => g.list.length > 0);
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-12">
@@ -85,41 +61,18 @@ export default function TeamPage() {
         }
       />
 
-      {/* Filter Tabs: shown once team members exist in src/data/team.ts */}
-      {teamData.length > 0 && (
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        {categories.map((cat) => (
-          <button
-            key={cat.value}
-            onClick={() => setFilter(cat.value)}
-            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
-              filter === cat.value
-                ? "bg-primary text-on-primary shadow-md shadow-primary/20"
-                : "bg-surface text-muted hover:text-ink-soft hover:bg-sunken border border-line"
-            }`}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
-      )}
-
       <h2 className="sr-only">Team members</h2>
       {/* Members Grid */}
-      {filteredMembers.length === 0 && (
+      {teamData.length === 0 && (
         <EmptyState
           icon={Sparkles}
-          title={teamData.length > 0 ? "No team members in this group" : "No team members listed yet"}
-          description={
-            teamData.length > 0
-              ? "Choose another group to see the rest of the team."
-              : "Team members will appear here once they are added."
-          }
+          title="No team members listed yet"
+          description="Team members will appear here once they are added."
         />
       )}
       {groups.map((group) => (
-      <section key={group.title ?? "list"} className="space-y-5" aria-label={group.title ?? undefined}>
-      {group.title && <div className="cmd-label">{group.title}</div>}
+      <section key={group.title} className="space-y-5" aria-label={group.title}>
+      <div className="cmd-label">{group.title}</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {group.list.map((member) => (
           <GlassCard key={member.id} title={`~/team/${member.id}`}>
