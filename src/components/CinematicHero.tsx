@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { ScrollCue } from "@/components/ScrollCue";
 import { MagneticLink } from "@/components/MagneticLink";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArrowRight } from "lucide-react";
@@ -119,6 +120,7 @@ export function CinematicHero({ selected, onSelect }: CinematicHeroProps) {
           </Link>
         </div>
       )}
+      <ScrollCue />
     </section>
   );
 }
