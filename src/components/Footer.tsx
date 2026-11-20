@@ -28,7 +28,7 @@ export function Footer() {
           {/* Brand & Mission */}
           <div className="space-y-4 md:col-span-1 lg:col-span-1">
             <div className="flex items-center gap-2.5">
-              <Image src="/logo-mark.png" alt="" width={60} height={36} className="h-9 w-[60px] object-contain" />
+              <Image src="/logo-mark.png" alt="" width={594} height={678} className="h-10 w-auto object-contain" />
               <span className="font-bold text-ink text-sm">{siteConfig.name}</span>
             </div>
             <p className="text-xs text-muted leading-relaxed">

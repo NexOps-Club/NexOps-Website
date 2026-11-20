@@ -35,10 +35,10 @@ export function Navbar() {
             <Image
               src="/logo-mark.png"
               alt=""
-              width={70}
-              height={42}
+              width={594}
+              height={678}
               preload
-              className="h-9 w-[60px] object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
             <span className="font-heading text-xl font-bold tracking-tight text-ink sm:text-2xl">{siteConfig.name}</span>
           </Link>

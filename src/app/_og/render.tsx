@@ -100,7 +100,7 @@ export async function renderSocialImage() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={logoSrc} width={150} height={90} alt="" />
+            <img src={logoSrc} width={96} height={110} alt="" />
             <div style={{ display: "flex", fontSize: 30, fontWeight: 500, color: "#AAB4CC" }}>
               Student technical community
             </div>
