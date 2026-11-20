@@ -69,7 +69,10 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className={`hidden lg:flex items-center ${isHome ? "gap-7 xl:gap-9" : "gap-1 xl:gap-1.5"}`} aria-label="Main">
+          <nav
+            className={`hidden lg:flex items-center ${isHome ? "glass-pill gap-1 rounded-full p-1.5" : "gap-1 xl:gap-1.5"}`}
+            aria-label="Main"
+          >
             {siteConfig.nav
               .filter((item) => !(isHome && item.href === "/resources"))
               .map((item) => {
@@ -81,10 +84,10 @@ export function Navbar() {
                   aria-current={isActive ? "page" : undefined}
                   className={
                     isHome
-                      ? `whitespace-nowrap border-b py-1 text-sm transition-colors ${
+                      ? `whitespace-nowrap rounded-full border px-4 py-1.5 text-sm transition-all duration-200 ${
                           isActive
-                            ? "border-ink/60 text-ink"
-                            : "border-transparent text-ink-soft hover:text-ink"
+                            ? "border-white/25 bg-white/15 text-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_4px_14px_-6px_rgb(96_165_250/0.5)]"
+                            : "border-transparent text-ink-soft hover:border-white/15 hover:bg-white/10 hover:text-ink"
                         }`
                       : `whitespace-nowrap px-2.5 xl:px-3 py-1.5 text-sm font-medium rounded-full transition-all ${
                           isActive
