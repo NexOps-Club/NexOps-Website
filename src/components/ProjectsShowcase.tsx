@@ -3,12 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { BentoTile } from "@/components/BentoTile";
 import { Section, SectionHeader } from "@/components/Section";
 import { projectsData } from "@/data/projects";
-import { VERIFIED } from "@/lib/verified";
 
-/**
- * Featured member projects. Until project details are verified, only the title, category and stack show.
- * Descriptions, leads and repository or demo links stay hidden (see src/lib/verified.ts).
- */
+/** Featured member projects from src/data/projects.ts. Shows an empty state until projects are added. */
 export function ProjectsShowcase() {
   const featured = projectsData.filter((p) => p.featured).slice(0, 3);
   return (
@@ -20,12 +16,18 @@ export function ProjectsShowcase() {
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
+      {featured.length === 0 ? (
+        <div className="mt-10 rounded-xl border border-dashed border-line-strong p-8 text-center">
+          <p className="text-sm font-semibold text-ink-soft">No projects listed yet.</p>
+          <p className="mt-1 text-xs text-muted">Member projects will appear here once they are added.</p>
+        </div>
+      ) : (
       <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
         {featured.map((p) => (
           <BentoTile key={p.id} as="article" tone="dark" className="flex flex-col gap-3 p-7">
             <span className="self-start rounded-md border border-line px-2 py-0.5 font-mono text-[11px] text-accent">{p.category}</span>
             <h3 className="text-xl font-bold text-ink">{p.title}</h3>
-            {VERIFIED.projectDetails && <p className="text-sm leading-relaxed text-muted">{p.description}</p>}
+            <p className="text-sm leading-relaxed text-muted">{p.description}</p>
             <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
               {p.techStack.slice(0, 4).map((t) => (
                 <span key={t} className="rounded-md bg-ink/[0.07] px-2 py-0.5 font-mono text-[11px] text-ink-soft">
@@ -36,6 +38,7 @@ export function ProjectsShowcase() {
           </BentoTile>
         ))}
       </div>
+      )}
     </Section>
   );
 }

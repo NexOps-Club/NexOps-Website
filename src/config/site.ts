@@ -51,16 +51,18 @@ export const siteConfig: SiteConfig = {
     campus: "NH-4, Sira Road",
     city: "Tumakuru, Karnataka 572106",
   },
+  /** Fill these in with real values. Anything left empty is hidden across the site. */
   contact: {
-    email: "nexops.siet@gmail.com",
-    discord: "https://discord.gg/nexops-siet",
-    whatsapp: "https://chat.whatsapp.com/nexops-community",
-    linkedin: "https://linkedin.com/company/nexops-siet",
-    github: "https://github.com/Naveen4421/DevOps",
-    instagram: "https://instagram.com/nexops_siet",
-    x: "https://x.com/nexops_siet",
+    email: "",
+    discord: "",
+    whatsapp: "",
+    linkedin: "",
+    github: "",
+    instagram: "",
+    x: "",
   },
-  recruitment: { open: true, label: "Fall Cohort" },
+  /** Set open to true and add a label (for example the cohort name) to show the recruiting indicator. */
+  recruitment: { open: false, label: "" },
   // Keep false until the listed events are verified real. The Event JSON-LD builder stays available.
   seo: { publishEventStructuredData: false },
   nav: [

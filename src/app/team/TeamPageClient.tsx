@@ -5,7 +5,6 @@ import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import Image from "next/image";
 import { teamData } from "@/data/team";
-import { VERIFIED } from "@/lib/verified";
 import { Mail, Sparkles, ArrowRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/Icons";
 import Link from "next/link";
@@ -99,8 +98,12 @@ export default function TeamPage() {
       {filteredMembers.length === 0 && (
         <EmptyState
           icon={Sparkles}
-          title="No team members in this group"
-          description="Choose another group to see the rest of the team."
+          title={teamData.length > 0 ? "No team members in this group" : "No team members listed yet"}
+          description={
+            teamData.length > 0
+              ? "Choose another group to see the rest of the team."
+              : "Team members will appear here once they are added."
+          }
         />
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -145,8 +148,7 @@ export default function TeamPage() {
                 </div>
               )}
 
-              {/* Social links stay hidden until verified */}
-              {VERIFIED.socialLinks && (
+              {(member.github || member.linkedin || member.email) && (
               <div className="pt-3 border-t border-ink/10 flex items-center gap-2">
                 {member.github && (
                   <a

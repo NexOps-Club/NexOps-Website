@@ -1,3 +1,4 @@
+import type { EventItem } from "../src/types/index.js";
 import { test, describe, afterEach } from "node:test";
 import assert from "node:assert";
 import { getSiteUrl, pageMetadata, PUBLIC_ROUTES } from "../src/lib/seo.js";
@@ -81,8 +82,8 @@ describe("structured data", () => {
     const org = organizationJsonLd(new URL("https://example.org"));
     const json = JSON.stringify(org);
     assert.strictEqual(org["@type"], "Organization");
-    assert.ok(!json.includes(siteConfig.contact.email), "no email address");
-    assert.deepStrictEqual(org.sameAs, [siteConfig.contact.github]);
+    if (siteConfig.contact.email) assert.ok(!json.includes(siteConfig.contact.email), "no email address");
+    assert.deepStrictEqual(org.sameAs, siteConfig.contact.github ? [siteConfig.contact.github] : undefined);
     assert.strictEqual(org.url, "https://example.org/");
   });
 
@@ -102,8 +103,24 @@ describe("structured data", () => {
   });
 
   test("events builder: upcoming only, no performers, offers or invented addresses", () => {
-    const events = eventsJsonLd(null, undefined, true);
-    assert.ok(events.length > 0);
+    const sample: EventItem = {
+      id: "t1",
+      title: "Sample workshop",
+      slug: "sample-workshop",
+      category: "Workshop",
+      status: "upcoming",
+      level: "beginner",
+      date: "2030-01-01",
+      time: "10:00",
+      venue: "Room 1",
+      description: "d",
+      highlights: [],
+      registrationOpen: true,
+      calendarData: { title: "t", description: "d", location: "Room 1", startTime: "20300101T100000Z", endTime: "20300101T120000Z" },
+      tags: [],
+    };
+    const events = eventsJsonLd(null, [sample, { ...sample, id: "t2", status: "past" }], true);
+    assert.strictEqual(events.length, 1);
     for (const event of events) {
       assert.strictEqual(event["@type"], "Event");
       assert.ok(typeof event.startDate === "string" && typeof event.endDate === "string");

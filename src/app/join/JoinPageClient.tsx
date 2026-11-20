@@ -5,7 +5,6 @@ import { StatusMessage } from "@/components/StatusMessage";
 import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import { siteConfig } from "@/config/site";
-import { VERIFIED } from "@/lib/verified";
 import { Sparkles, CheckCircle2, ShieldCheck, Send, Loader2 } from "lucide-react";
 import { useTurnstile } from "@/hooks/useTurnstile";
 
@@ -154,9 +153,9 @@ export default function JoinPage() {
 
               <div className="p-4 rounded-lg bg-canvas/80 border border-line text-xs text-muted space-y-2">
                 <p className="font-semibold text-ink-soft">Got questions before applying?</p>
-                {VERIFIED.contactEmail ? (
+                {siteConfig.contact.email ? (
                   <p>
-                    Reach out anytime on our Discord server or email us at{" "}
+                    Reach out anytime by email at{" "}
                     <a href={`mailto:${siteConfig.contact.email}`} className="text-brand hover:underline">
                       {siteConfig.contact.email}
                     </a>

@@ -4,7 +4,6 @@ import { EmptyState } from "@/components/EmptyState";
 import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import { projectsData } from "@/data/projects";
-import { VERIFIED } from "@/lib/verified";
 import {
   Code2,
   ExternalLink,
@@ -99,7 +98,7 @@ export default function ProjectsPage() {
               <span className="rounded bg-accent/10 border border-accent/30 px-2.5 py-0.5 text-xs font-mono text-accent">
                 {project.category}
               </span>
-              {VERIFIED.projectDetails && (
+              {project.lead && (
                 <div className="flex items-center gap-2 text-xs text-muted">
                   <span>Lead: {project.lead}</span>
                 </div>
@@ -110,9 +109,7 @@ export default function ProjectsPage() {
               <h3 className="text-lg font-bold text-ink group-hover:text-accent transition-colors">
                 {project.title}
               </h3>
-              {VERIFIED.projectDetails && (
-                <p className="mt-2 text-xs text-muted leading-relaxed">{project.description}</p>
-              )}
+              <p className="mt-2 text-xs text-muted leading-relaxed">{project.description}</p>
             </div>
 
             {/* Tech Stack Badges */}
@@ -127,19 +124,22 @@ export default function ProjectsPage() {
               ))}
             </div>
 
-            {/* Links stay hidden until repository and demo URLs are verified */}
-            {VERIFIED.projectDetails && (
+            {(project.githubUrl || project.demoUrl) && (
             <div className="mt-auto pt-4 border-t border-ink/10 flex items-center justify-between text-xs">
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 font-semibold text-ink-soft hover:text-accent transition"
-              >
-                <GithubIcon className="h-4 w-4" />
-                <span>View Source Code</span>
-                <ExternalLink className="h-3 w-3" />
-              </a>
+              {project.githubUrl ? (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 font-semibold text-ink-soft hover:text-accent transition"
+                >
+                  <GithubIcon className="h-4 w-4" />
+                  <span>View Source Code</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              ) : (
+                <span />
+              )}
 
               {project.demoUrl && (
                 <a

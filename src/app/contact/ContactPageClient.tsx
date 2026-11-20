@@ -4,7 +4,6 @@ import { GlassCard } from "@/components/GlassCard";
 import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import { siteConfig } from "@/config/site";
-import { VERIFIED } from "@/lib/verified";
 import { faqsData } from "@/data/faqs";
 import {
   Mail,
@@ -58,7 +57,7 @@ export default function ContactPage() {
         description={
           <>
             Have an inquiry, workshop proposal, corporate sponsorship idea, or just want to chat with our student
-            engineers? Drop us a message or join our Discord.
+            engineers? Drop us a message and we will get back to you.
           </>
         }
       />
@@ -68,12 +67,12 @@ export default function ContactPage() {
         {/* Left: Direct Channels & Cards */}
         <div className="lg:col-span-5 space-y-6">
           {/* Community Channels */}
-          {(VERIFIED.socialLinks || VERIFIED.contactEmail) && (
+          {(siteConfig.contact.discord || siteConfig.contact.whatsapp || siteConfig.contact.email) && (
           <div className="panel p-6 space-y-4">
             <h2 className="text-base font-bold text-ink">Direct Community Channels</h2>
 
             <div className="space-y-3 text-xs">
-              {VERIFIED.socialLinks && (
+              {siteConfig.contact.discord && (
               <a
                 href={siteConfig.contact.discord}
                 target="_blank"
@@ -93,7 +92,7 @@ export default function ContactPage() {
               </a>
               )}
 
-              {VERIFIED.socialLinks && (
+              {siteConfig.contact.whatsapp && (
               <a
                 href={siteConfig.contact.whatsapp}
                 target="_blank"
@@ -113,7 +112,7 @@ export default function ContactPage() {
               </a>
               )}
 
-              {VERIFIED.contactEmail && (
+              {siteConfig.contact.email && (
               <a
                 href={`mailto:${siteConfig.contact.email}`}
                 className="flex items-center justify-between p-3 rounded-xl bg-canvas/70 border border-line hover:border-primary/50 transition group"
@@ -144,9 +143,6 @@ export default function ContactPage() {
               <p className="font-semibold text-ink-soft">{siteConfig.college.name}</p>
               <p>{siteConfig.college.department}</p>
               <p>{siteConfig.college.campus}</p>
-              {VERIFIED.contactDetails && (
-                <p className="text-subtle pt-1">Office Hours: Mondays & Thursdays, 4:00 PM – 6:00 PM IST</p>
-              )}
             </div>
           </div>
         </div>
@@ -259,7 +255,8 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* FAQ Accordion Section */}
+      {/* FAQ Accordion Section: hidden until FAQs are added in src/data/faqs.ts */}
+      {faqsData.length > 0 && (
       <div className="space-y-6 pt-6 border-t border-line">
         <div className="text-center max-w-lg mx-auto space-y-2">
           <span className="text-xs font-mono uppercase tracking-wider text-brand font-semibold flex items-center justify-center gap-1">
@@ -294,6 +291,7 @@ export default function ContactPage() {
           ))}
         </div>
       </div>
+      )}
     </div>
   );
 }

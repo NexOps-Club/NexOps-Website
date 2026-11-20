@@ -4,7 +4,6 @@ import { pageMetadata } from "@/lib/seo";
 import { GlassCard } from "@/components/GlassCard";
 import { PageHeader } from "@/components/PageHeader";
 import { siteConfig } from "@/config/site";
-import { VERIFIED } from "@/lib/verified";
 import { ShieldCheck, Terminal, Server, HeartHandshake, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = pageMetadata({
@@ -16,28 +15,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function AboutPage() {
-  const milestones = [
-    {
-      year: "2023",
-      title: "Club Founded",
-      desc: "Started by 5 passionate students in a basement lab who wanted to run Docker containers instead of monolithic VMs.",
-    },
-    {
-      year: "2024",
-      title: "Campus Homelab Launched",
-      desc: "Commissioned our first 6-node Raspberry Pi and x86 rack cluster in collaboration with the CSE Department.",
-    },
-    {
-      year: "2025",
-      title: "First Cloud CTF & Hackathon",
-      desc: "Hosted 'HackTheCloud', our first cloud CTF and hackathon, sponsored by cloud industry partners.",
-    },
-    {
-      year: "2026",
-      title: "DevOps & SRE Placement Wave",
-      desc: "Over 45 club members joined top tech firms, unicorns, and open-source foundations in infrastructure roles.",
-    },
-  ];
+  // Add real milestones here (year, title, desc). The timeline stays hidden until you do.
+  const milestones: { year: string; title: string; desc: string }[] = [];
 
   const values = [
     {
@@ -127,7 +106,7 @@ export default function AboutPage() {
       </div>
 
       {/* Timeline / Milestones: invented history stays hidden until verified */}
-      {VERIFIED.aboutHistory && (
+      {milestones.length > 0 && (
       <div className="space-y-8">
         <div className="text-center max-w-xl mx-auto space-y-2">
           <span className="text-xs font-mono uppercase tracking-wider text-accent font-semibold">Evolution</span>

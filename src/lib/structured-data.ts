@@ -34,7 +34,7 @@ export function organizationJsonLd(origin: URL | null): JsonLdObject {
       name: siteConfig.college.name,
       address: `${siteConfig.college.campus}, ${siteConfig.college.city}`,
     },
-    sameAs: [siteConfig.contact.github],
+    sameAs: siteConfig.contact.github ? [siteConfig.contact.github] : undefined,
   });
 }
 

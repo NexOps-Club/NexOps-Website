@@ -12,7 +12,6 @@ import { DomainShowcase } from "@/components/DomainShowcase";
 import { ProjectsShowcase } from "@/components/ProjectsShowcase";
 import { Section, SectionHeader } from "@/components/Section";
 import { BentoTile } from "@/components/BentoTile";
-import { VERIFIED } from "@/lib/verified";
 import { EventItem } from "@/types";
 import { ArrowRight } from "lucide-react";
 
@@ -21,8 +20,7 @@ export default function HomePage() {
   const [domain, setDomain] = useState<number | null>(null);
   const [level, setLevel] = useState<LevelFilterValue>("all");
 
-  // Sample events stay hidden until src/data/events.ts holds verified listings (see src/lib/verified.ts).
-  const upcomingEvents = (VERIFIED.events ? eventsData : [])
+  const upcomingEvents = eventsData
     .filter((e) => e.status === "upcoming" && (level === "all" || e.level === level))
     .slice(0, 3);
 
@@ -42,15 +40,15 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {VERIFIED.events && <LevelFilter value={level} onChange={setLevel} className="mt-8" />}
+        {eventsData.length > 0 && <LevelFilter value={level} onChange={setLevel} className="mt-8" />}
 
         {upcomingEvents.length === 0 ? (
           <div className="mt-8 space-y-2 rounded-xl border border-dashed border-line-strong p-8 text-center">
             <p className="text-sm font-semibold text-ink-soft">
-              {VERIFIED.events ? "No upcoming events at this level yet." : "No events announced yet."}
+              {eventsData.length > 0 ? "No upcoming events at this level yet." : "No events announced yet."}
             </p>
             <p className="text-xs text-muted">
-              {VERIFIED.events ? "Try another level, or start" : "New workshops, talks and CTFs will appear here. Start"} with the{" "}
+              {eventsData.length > 0 ? "Try another level, or start" : "New workshops, talks and CTFs will appear here. Start"} with the{" "}
               <Link href="/resources" className="text-brand hover:underline">
                 self-paced roadmaps
               </Link>

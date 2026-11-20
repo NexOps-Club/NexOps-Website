@@ -2,7 +2,6 @@ import { GlassCard } from "@/components/GlassCard";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Section, SectionHeader } from "@/components/Section";
-import { VERIFIED } from "@/lib/verified";
 
 const STEPS = [
   {
@@ -23,7 +22,7 @@ const STEPS = [
     items: [
       "Automated CI/CD pipelines",
       "Monitoring dashboards",
-      VERIFIED.homelab ? "Contributing to the club homelab" : "Contributing to club projects",
+      "Contributing to club projects",
     ],
     tone: "text-accent-2",
   },
