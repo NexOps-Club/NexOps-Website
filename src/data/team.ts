@@ -19,6 +19,7 @@ export const teamData: TeamMember[] = [
     yearOrDesignation: "NexOps",
     bio: "",
     photoUrl: "",
+    github: "https://github.com/Naveen4421",
   },
   {
     id: "kusuma",
@@ -28,6 +29,7 @@ export const teamData: TeamMember[] = [
     yearOrDesignation: "NexOps",
     bio: "",
     photoUrl: "",
+    github: "https://github.com/kusuma-gowda446",
   },
   {
     id: "krutika-pujer",
@@ -37,6 +39,7 @@ export const teamData: TeamMember[] = [
     yearOrDesignation: "NexOps",
     bio: "",
     photoUrl: "",
+    github: "https://github.com/KrutikaPujer0803",
   },
   {
     id: "shaik-mohammad-naqeeb",
@@ -46,5 +49,6 @@ export const teamData: TeamMember[] = [
     yearOrDesignation: "NexOps",
     bio: "",
     photoUrl: "",
+    github: "https://github.com/Smohammadnaqeeb/Smohammadnaqeeb",
   },
 ];
