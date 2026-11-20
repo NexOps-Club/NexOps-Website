@@ -9,7 +9,7 @@ export const teamData: TeamMember[] = [
     category: "faculty",
     yearOrDesignation: "Associate Professor, HOD of AI&DS and AI&ML",
     bio: "",
-    photoUrl: "",
+    photoUrl: "/team/dr-girish.jpg",
     github: "https://github.com/girishl",
   },
   {
