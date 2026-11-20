@@ -92,4 +92,14 @@ export const teamData: TeamMember[] = [
     photoUrl: "",
     github: "https://github.com/Bhuvan-esh",
   },
+  {
+    id: "trupti",
+    name: "Trupti",
+    role: "Member",
+    category: "core",
+    yearOrDesignation: "NexOps",
+    bio: "",
+    photoUrl: "",
+    github: "https://github.com/trupthi6",
+  },
 ];
