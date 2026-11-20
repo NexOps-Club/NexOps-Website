@@ -4,18 +4,7 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { StatusMessage } from "@/components/StatusMessage";
 import { GlassCard } from "@/components/GlassCard";
 import { useEffect, useState, useCallback } from "react";
-import {
-  Users,
-  CalendarCheck,
-  Mail,
-  Shield,
-  Search,
-  RefreshCw,
-  Lock,
-  LogOut,
-  Terminal,
-  Loader2,
-} from "lucide-react";
+import { Users, CalendarCheck, Mail, Shield, Search, RefreshCw, Lock, LogOut, Terminal, Loader2 } from "lucide-react";
 
 interface Application {
   id: string;
@@ -168,58 +157,52 @@ export default function AdminPage() {
       <div className="mx-auto max-w-md px-4 py-20">
         <GlassCard title="~/admin/login">
           <div className="p-8 space-y-6">
-          <div className="text-center space-y-2">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/30 text-brand">
-              <Lock className="h-6 w-6" />
+            <div className="text-center space-y-2">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/30 text-brand">
+                <Lock className="h-6 w-6" />
+              </div>
+              <h2 className="text-xl font-bold text-ink tracking-tight">NexOps Control Plane</h2>
+              <p className="text-xs text-muted font-mono">Authorized SIET Core Leads Access Only</p>
             </div>
-            <h2 className="text-xl font-bold text-ink tracking-tight">NexOps Control Plane</h2>
-            <p className="text-xs text-muted font-mono">
-              Authorized SIET Core Leads Access Only
+
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label className="block text-xs font-mono text-ink-soft mb-1.5">Admin Master Passkey</label>
+                <input
+                  type="password"
+                  required
+                  placeholder="••••••••••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="glass-input w-full rounded-lg px-3.5 py-2.5 text-sm font-mono"
+                />
+              </div>
+
+              {loginError && <StatusMessage tone="error">{loginError}</StatusMessage>}
+
+              <button
+                type="submit"
+                disabled={loggingIn}
+                className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-primary-hover py-2.5 text-xs font-bold text-on-primary transition active:scale-95 disabled:opacity-50"
+              >
+                {loggingIn ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Verifying Session...</span>
+                  </>
+                ) : (
+                  <>
+                    <Terminal className="h-4 w-4" />
+                    <span>Access Dashboard</span>
+                  </>
+                )}
+              </button>
+            </form>
+
+            <p className="text-center text-[11px] text-subtle font-mono">
+              Protected with httpOnly secure cookies. Secrets in URLs are rejected.
             </p>
           </div>
-
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label className="block text-xs font-mono text-ink-soft mb-1.5">
-                Admin Master Passkey
-              </label>
-              <input
-                type="password"
-                required
-                placeholder="••••••••••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="glass-input w-full rounded-lg px-3.5 py-2.5 text-sm font-mono"
-              />
-            </div>
-
-            {loginError && (
-              <StatusMessage tone="error">{loginError}</StatusMessage>
-            )}
-
-            <button
-              type="submit"
-              disabled={loggingIn}
-              className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-primary-hover py-2.5 text-xs font-bold text-on-primary transition active:scale-95 disabled:opacity-50"
-            >
-              {loggingIn ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Verifying Session...</span>
-                </>
-              ) : (
-                <>
-                  <Terminal className="h-4 w-4" />
-                  <span>Access Dashboard</span>
-                </>
-              )}
-            </button>
-          </form>
-
-          <p className="text-center text-[11px] text-subtle font-mono">
-            Protected with httpOnly secure cookies. Secrets in URLs are rejected.
-          </p>
-        </div>
         </GlassCard>
       </div>
     );
@@ -235,12 +218,8 @@ export default function AdminPage() {
             <Shield className="h-3.5 w-3.5" />
             <span>NexOps Control Plane • SIET Tumakuru</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-ink mt-2">
-            Club Admin & Live Registrations
-          </h1>
-          <p className="text-xs text-muted">
-            Connected to Prisma SQLite/PostgreSQL. Live session verified.
-          </p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-ink mt-2">Club Admin & Live Registrations</h1>
+          <p className="text-xs text-muted">Connected to Prisma SQLite/PostgreSQL. Live session verified.</p>
         </div>
 
         <div className="flex items-center gap-2.5">
@@ -298,9 +277,7 @@ export default function AdminPage() {
           <button
             onClick={() => setActiveTab("applications")}
             className={`flex-1 sm:flex-none px-3.5 py-1.5 text-xs font-semibold rounded-md transition ${
-              activeTab === "applications"
-                ? "bg-primary text-on-primary font-bold"
-                : "text-muted hover:text-ink-soft"
+              activeTab === "applications" ? "bg-primary text-on-primary font-bold" : "text-muted hover:text-ink-soft"
             }`}
           >
             Applications ({applications.length})
@@ -308,9 +285,7 @@ export default function AdminPage() {
           <button
             onClick={() => setActiveTab("rsvps")}
             className={`flex-1 sm:flex-none px-3.5 py-1.5 text-xs font-semibold rounded-md transition ${
-              activeTab === "rsvps"
-                ? "bg-primary text-on-primary font-bold"
-                : "text-muted hover:text-ink-soft"
+              activeTab === "rsvps" ? "bg-primary text-on-primary font-bold" : "text-muted hover:text-ink-soft"
             }`}
           >
             Event RSVPs ({registrations.length})
@@ -318,9 +293,7 @@ export default function AdminPage() {
           <button
             onClick={() => setActiveTab("messages")}
             className={`flex-1 sm:flex-none px-3.5 py-1.5 text-xs font-semibold rounded-md transition ${
-              activeTab === "messages"
-                ? "bg-primary text-on-primary font-bold"
-                : "text-muted hover:text-ink-soft"
+              activeTab === "messages" ? "bg-primary text-on-primary font-bold" : "text-muted hover:text-ink-soft"
             }`}
           >
             Inquiries ({messages.length})
@@ -367,7 +340,7 @@ export default function AdminPage() {
                       (a) =>
                         a.fullName.toLowerCase().includes(search.toLowerCase()) ||
                         a.email.toLowerCase().includes(search.toLowerCase()) ||
-                        a.track.toLowerCase().includes(search.toLowerCase())
+                        a.track.toLowerCase().includes(search.toLowerCase()),
                     )
                     .map((app) => (
                       <tr key={app.id} className="hover:bg-sunken/40 transition">
@@ -375,7 +348,9 @@ export default function AdminPage() {
                           <p className="font-semibold text-ink">{app.fullName}</p>
                           <p className="text-[11px] text-muted">{app.email}</p>
                         </td>
-                        <td className="p-3 font-mono">{app.studentId} • {app.branch}</td>
+                        <td className="p-3 font-mono">
+                          {app.studentId} • {app.branch}
+                        </td>
                         <td className="p-3">
                           <span className="rounded bg-primary/10 border border-primary/20 px-2 py-0.5 text-[10px] text-brand font-medium">
                             {app.track}
@@ -420,7 +395,7 @@ export default function AdminPage() {
                     .filter(
                       (r) =>
                         r.fullName.toLowerCase().includes(search.toLowerCase()) ||
-                        r.eventTitle.toLowerCase().includes(search.toLowerCase())
+                        r.eventTitle.toLowerCase().includes(search.toLowerCase()),
                     )
                     .map((r) => (
                       <tr key={r.id} className="hover:bg-sunken/40 transition">
@@ -428,7 +403,9 @@ export default function AdminPage() {
                           <p className="font-semibold text-ink">{r.fullName}</p>
                           <p className="text-[11px] text-muted">{r.email}</p>
                         </td>
-                        <td className="p-3 font-mono">{r.studentId} ({r.branch})</td>
+                        <td className="p-3 font-mono">
+                          {r.studentId} ({r.branch})
+                        </td>
                         <td className="p-3 font-medium text-brand">{r.eventTitle}</td>
                         <td className="p-3 font-mono text-[11px] text-subtle">
                           {new Date(r.createdAt).toLocaleDateString()}
@@ -449,15 +426,13 @@ export default function AdminPage() {
         {activeTab === "messages" && (
           <div className="p-4 space-y-3">
             {messages.length === 0 ? (
-              <p className="text-center py-8 text-xs text-subtle">
-                No inquiries sent yet.
-              </p>
+              <p className="text-center py-8 text-xs text-subtle">No inquiries sent yet.</p>
             ) : (
               messages
                 .filter(
                   (m) =>
                     m.name.toLowerCase().includes(search.toLowerCase()) ||
-                    m.subject.toLowerCase().includes(search.toLowerCase())
+                    m.subject.toLowerCase().includes(search.toLowerCase()),
                 )
                 .map((m) => (
                   <div key={m.id} className="rounded-lg border border-line bg-canvas/60 p-4 space-y-2">

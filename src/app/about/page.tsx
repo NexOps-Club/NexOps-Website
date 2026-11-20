@@ -2,13 +2,7 @@ import Link from "next/link";
 import { GlassCard } from "@/components/GlassCard";
 import { PageHeader } from "@/components/PageHeader";
 import { siteConfig } from "@/config/site";
-import {
-  ShieldCheck,
-  Terminal,
-  Server,
-  HeartHandshake,
-  ArrowRight,
-} from "lucide-react";
+import { ShieldCheck, Terminal, Server, HeartHandshake, ArrowRight } from "lucide-react";
 
 export default function AboutPage() {
   const milestones = [
@@ -65,7 +59,8 @@ export default function AboutPage() {
         title="Engineering the digital backbone of the campus."
         description={
           <>
-            We are the student-driven infrastructure community at {siteConfig.college.name}, dedicated to cultivating world-class talent in Cloud Computing, Computer Networking, and Site Reliability Engineering.
+            We are the student-driven infrastructure community at {siteConfig.college.name}, dedicated to cultivating
+            world-class talent in Cloud Computing, Computer Networking, and Site Reliability Engineering.
           </>
         }
       />
@@ -74,48 +69,41 @@ export default function AboutPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <GlassCard title="~/about/mission">
           <div className="p-8 space-y-4 relative overflow-hidden">
-          <div className="h-2 w-24 bg-primary rounded-full" />
-          <h2 className="text-xl sm:text-2xl font-bold text-ink">Our Mission</h2>
-          <p className="text-sm text-muted leading-relaxed">
-            To empower students with practical, industry-standard systems knowledge.
-            We eliminate the gap between theoretical classroom concepts and real-world production engineering
-            by providing hands-on cloud labs, live deployment environments, and peer-to-peer mentorship.
-          </p>
-        </div>
+            <div className="h-2 w-24 bg-primary rounded-full" />
+            <h2 className="text-xl sm:text-2xl font-bold text-ink">Our Mission</h2>
+            <p className="text-sm text-muted leading-relaxed">
+              To empower students with practical, industry-standard systems knowledge. We eliminate the gap between
+              theoretical classroom concepts and real-world production engineering by providing hands-on cloud labs,
+              live deployment environments, and peer-to-peer mentorship.
+            </p>
+          </div>
         </GlassCard>
 
         <GlassCard title="~/about/vision">
           <div className="p-8 space-y-4 relative overflow-hidden">
-          <div className="h-2 w-24 bg-accent rounded-full" />
-          <h2 className="text-xl sm:text-2xl font-bold text-ink">Our Vision</h2>
-          <p className="text-sm text-muted leading-relaxed">
-            To become a premier student hub for systems engineering, recognized nationally for producing
-            exceptional cloud architects, SREs, and open-source contributors who build reliable, secure,
-            and scalable software for the world.
-          </p>
-        </div>
+            <div className="h-2 w-24 bg-accent rounded-full" />
+            <h2 className="text-xl sm:text-2xl font-bold text-ink">Our Vision</h2>
+            <p className="text-sm text-muted leading-relaxed">
+              To become a premier student hub for systems engineering, recognized nationally for producing exceptional
+              cloud architects, SREs, and open-source contributors who build reliable, secure, and scalable software for
+              the world.
+            </p>
+          </div>
         </GlassCard>
       </div>
 
       {/* Core Values */}
       <div className="space-y-8">
         <div className="text-center max-w-xl mx-auto space-y-2">
-          <span className="text-xs font-mono uppercase tracking-wider text-brand font-semibold">
-            Our DNA
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-ink">
-            Principles We Live By
-          </h2>
+          <span className="text-xs font-mono uppercase tracking-wider text-brand font-semibold">Our DNA</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-ink">Principles We Live By</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((val) => {
             const Icon = val.icon;
             return (
-              <div
-                key={val.title}
-                className="panel-inset p-6 space-y-3 hover:border-line-strong transition"
-              >
+              <div key={val.title} className="panel-inset p-6 space-y-3 hover:border-line-strong transition">
                 <div className="h-10 w-10 rounded-lg bg-primary/10 border border-primary/20 text-brand flex items-center justify-center">
                   <Icon className="h-5 w-5" />
                 </div>
@@ -130,23 +118,14 @@ export default function AboutPage() {
       {/* Timeline / Milestones */}
       <div className="space-y-8">
         <div className="text-center max-w-xl mx-auto space-y-2">
-          <span className="text-xs font-mono uppercase tracking-wider text-accent font-semibold">
-            Evolution
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-ink">
-            Our Journey So Far
-          </h2>
+          <span className="text-xs font-mono uppercase tracking-wider text-accent font-semibold">Evolution</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-ink">Our Journey So Far</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           {milestones.map((m) => (
-            <div
-              key={m.year}
-              className="panel p-6 space-y-3 relative"
-            >
-              <div className="text-2xl font-extrabold font-mono text-brand">
-                {m.year}
-              </div>
+            <div key={m.year} className="panel p-6 space-y-3 relative">
+              <div className="text-2xl font-extrabold font-mono text-brand">{m.year}</div>
               <h3 className="text-base font-bold text-ink">{m.title}</h3>
               <p className="text-xs text-muted leading-relaxed">{m.desc}</p>
             </div>
@@ -168,4 +147,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
