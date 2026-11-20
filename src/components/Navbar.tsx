@@ -104,7 +104,7 @@ export function Navbar() {
             {isHome && (
               <Link
                 href="/resources"
-                className="inline-flex items-center whitespace-nowrap rounded-full border border-line-strong bg-canvas/60 px-5 py-2 text-sm text-ink transition hover:border-ink/50 hover:bg-ink/10"
+                className="inline-flex items-center whitespace-nowrap rounded-full glass-pill px-5 py-2 text-sm text-ink active:scale-[0.97]"
               >
                 Roadmaps
               </Link>
@@ -113,7 +113,7 @@ export function Navbar() {
               href="/join"
               className={
                 isHome
-                  ? "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-line-strong bg-canvas/60 px-5 py-2 text-sm text-ink transition hover:border-ink/50 hover:bg-ink/10"
+                  ? "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full glass-pill px-5 py-2 text-sm text-ink active:scale-[0.97]"
                   : "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-4 py-2 text-xs lg:text-sm font-semibold text-on-primary transition hover:bg-primary-hover active:scale-95 shadow-md shadow-primary/20"
               }
             >
