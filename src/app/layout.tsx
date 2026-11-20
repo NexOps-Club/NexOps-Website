@@ -73,9 +73,17 @@ export default function RootLayout({
     >
       <body className="dark-stage cinema min-h-full flex flex-col bg-canvas text-ink selection:bg-primary selection:text-on-primary">
         <AmbientBackground />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[#f4f6fa] focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-[#05070b]"
+        >
+          Skip to main content
+        </a>
         <MotionProvider>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
+            {children}
+          </main>
           <Footer />
         </MotionProvider>
       </body>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { EventItem } from "@/types";
 import { X, CheckCircle, Calendar, Sparkles, Loader2 } from "lucide-react";
 
@@ -16,6 +16,53 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
   const [branch, setBranch] = useState("CSE");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const titleId = useId();
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
+
+  // Dialog behaviour: focus moves in, Tab stays inside, Escape closes, focus returns to the trigger.
+  const isOpen = event !== null;
+  useEffect(() => {
+    if (!isOpen) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const node = dialogRef.current;
+    const focusable = () =>
+      node
+        ? Array.from(
+            node.querySelectorAll<HTMLElement>(
+              'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])'
+            )
+          )
+        : [];
+    (node?.querySelector<HTMLElement>("input") ?? focusable()[0])?.focus();
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onCloseRef.current();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusable();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      previous?.focus();
+    };
+  }, [isOpen]);
 
   if (!event) return null;
 
@@ -62,13 +109,21 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg panel shadow-2xl p-6 sm:p-8 shadow-2xl">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className="relative w-full max-w-lg panel shadow-2xl p-6 sm:p-8 shadow-2xl"
+      >
         {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
+          aria-label="Close dialog"
           className="absolute right-4 top-4 rounded-lg p-1 text-muted hover:bg-sunken hover:text-ink transition"
         >
-          <X className="h-5 w-5" />
+          <X className="h-5 w-5" aria-hidden="true" />
         </button>
 
         {isSuccess ? (
@@ -76,7 +131,7 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/20 text-brand border border-primary/40">
               <CheckCircle className="h-8 w-8" />
             </div>
-            <h3 className="text-xl font-bold text-ink">You&apos;re Registered!</h3>
+            <h3 id={titleId} className="text-xl font-bold text-ink">You&apos;re Registered!</h3>
             <p className="text-sm text-muted max-w-sm mx-auto">
               A confirmation email has been dispatched to <strong className="text-ink-soft">{email}</strong>.
               We can&apos;t wait to see you at the session!
@@ -112,7 +167,7 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
               <span className="inline-block rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-brand border border-primary/20">
                 {event.category}
               </span>
-              <h3 className="mt-2 text-lg font-bold text-ink leading-snug">
+              <h3 id={titleId} className="mt-2 text-lg font-bold text-ink leading-snug">
                 {event.title}
               </h3>
               <p className="mt-1 text-xs text-muted flex items-center gap-2">
@@ -124,10 +179,10 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label htmlFor="reg-field-1" className="block text-xs font-medium text-ink-soft mb-1">
                   Full Name
                 </label>
-                <input
+                <input id="reg-field-1"
                   type="text"
                   required
                   placeholder="e.g. Alex Chen"
@@ -139,10 +194,10 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-ink-soft mb-1">
+                  <label htmlFor="reg-field-2" className="block text-xs font-medium text-ink-soft mb-1">
                     College Email
                   </label>
-                  <input
+                  <input id="reg-field-2"
                     type="email"
                     required
                     placeholder="student@college.edu"
@@ -152,10 +207,10 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-ink-soft mb-1">
+                  <label htmlFor="reg-field-3" className="block text-xs font-medium text-ink-soft mb-1">
                     Student ID / Roll No.
                   </label>
-                  <input
+                  <input id="reg-field-3"
                     type="text"
                     required
                     placeholder="e.g. 23BCSE102"
@@ -167,10 +222,10 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label htmlFor="reg-field-4" className="block text-xs font-medium text-ink-soft mb-1">
                   Branch / Department
                 </label>
-                <select
+                <select id="reg-field-4"
                   value={branch}
                   onChange={(e) => setBranch(e.target.value)}
                   className="glass-input w-full rounded-lg px-3 py-2 text-sm"

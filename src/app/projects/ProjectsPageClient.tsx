@@ -59,7 +59,7 @@ export default function ProjectsPage() {
               onClick={() => setSelectedCategory(cat)}
               className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition ${
                 selectedCategory === cat
-                  ? "bg-accent text-on-primary shadow-md shadow-accent/20"
+                  ? "bg-accent text-[#05070b] shadow-md shadow-accent/20"
                   : "bg-canvas text-muted hover:text-ink-soft border border-line"
               }`}
             >
@@ -163,11 +163,11 @@ export default function ProjectsPage() {
       <div className="panel p-8 text-center space-y-4">
         <h3 className="text-xl font-bold text-ink">Have a tool or project idea?</h3>
         <p className="text-xs sm:text-sm text-muted max-w-xl mx-auto">
-          We sponsor cloud hosting credits, domain names, and hardware compute for approved club member initiatives.
+          Tell us about it and we will help you find collaborators.
         </p>
         <Link
           href="/join"
-          className="inline-flex items-center gap-2 rounded-lg bg-accent hover:bg-accent/90 px-5 py-2.5 text-xs font-bold text-on-primary transition"
+          className="inline-flex items-center gap-2 rounded-lg bg-accent hover:bg-accent/90 px-5 py-2.5 text-xs font-bold text-[#05070b] transition"
         >
           <span>Propose a Project</span>
           <ArrowRight className="h-4 w-4" />

@@ -128,7 +128,7 @@ export function StaticNetwork({
                       role: "button",
                       tabIndex: 0,
                       "aria-pressed": active,
-                      "aria-label": d.name,
+                      "aria-label": d.short === d.name ? d.name : `${d.short}, ${d.name}`,
                       onClick: press,
                       onKeyDown: (e: React.KeyboardEvent) => {
                         if (e.key === "Enter" || e.key === " ") {

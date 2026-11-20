@@ -229,8 +229,8 @@ export default function JoinPage() {
                   {/* Name & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">Full Name *</label>
-                      <input
+                      <label htmlFor="join-field-1" className="block text-xs font-medium text-ink-soft mb-1">Full Name *</label>
+                      <input id="join-field-1"
                         type="text"
                         required
                         placeholder="e.g. Maya Sharma"
@@ -240,8 +240,8 @@ export default function JoinPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">College / Personal Email *</label>
-                      <input
+                      <label htmlFor="join-field-2" className="block text-xs font-medium text-ink-soft mb-1">College / Personal Email *</label>
+                      <input id="join-field-2"
                         type="email"
                         required
                         placeholder="maya@college.edu"
@@ -255,8 +255,8 @@ export default function JoinPage() {
                   {/* Phone & Student ID */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">Phone / WhatsApp Number</label>
-                      <input
+                      <label htmlFor="join-field-3" className="block text-xs font-medium text-ink-soft mb-1">Phone / WhatsApp Number</label>
+                      <input id="join-field-3"
                         type="tel"
                         placeholder="+91 98765 43210"
                         value={formData.phone}
@@ -265,8 +265,8 @@ export default function JoinPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">Student ID / Roll No. *</label>
-                      <input
+                      <label htmlFor="join-field-4" className="block text-xs font-medium text-ink-soft mb-1">Student ID / Roll No. *</label>
+                      <input id="join-field-4"
                         type="text"
                         required
                         placeholder="23CSE401"
@@ -280,8 +280,8 @@ export default function JoinPage() {
                   {/* Year & Branch */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">Academic Year *</label>
-                      <select
+                      <label htmlFor="join-field-5" className="block text-xs font-medium text-ink-soft mb-1">Academic Year *</label>
+                      <select id="join-field-5"
                         value={formData.year}
                         onChange={(e) => setFormData({ ...formData, year: e.target.value })}
                         className="glass-input w-full rounded-lg px-3 py-2 text-sm"
@@ -294,8 +294,8 @@ export default function JoinPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">Branch / Department *</label>
-                      <select
+                      <label htmlFor="join-field-6" className="block text-xs font-medium text-ink-soft mb-1">Branch / Department *</label>
+                      <select id="join-field-6"
                         value={formData.branch}
                         onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
                         className="glass-input w-full rounded-lg px-3 py-2 text-sm"
@@ -313,8 +313,8 @@ export default function JoinPage() {
                   {/* Track Interest & Skill Level */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">Primary Track Interest *</label>
-                      <select
+                      <label htmlFor="join-field-7" className="block text-xs font-medium text-ink-soft mb-1">Primary Track Interest *</label>
+                      <select id="join-field-7"
                         value={formData.track}
                         onChange={(e) => setFormData({ ...formData, track: e.target.value })}
                         className="glass-input w-full rounded-lg px-3 py-2 text-sm"
@@ -327,10 +327,10 @@ export default function JoinPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">
+                      <label htmlFor="join-field-8" className="block text-xs font-medium text-ink-soft mb-1">
                         Current Familiarity Level *
                       </label>
-                      <select
+                      <select id="join-field-8"
                         value={formData.experienceLevel}
                         onChange={(e) => setFormData({ ...formData, experienceLevel: e.target.value })}
                         className="glass-input w-full rounded-lg px-3 py-2 text-sm"
@@ -345,10 +345,10 @@ export default function JoinPage() {
 
                   {/* GitHub / Portfolio */}
                   <div>
-                    <label className="block text-xs font-medium text-ink-soft mb-1">
+                    <label htmlFor="join-field-9" className="block text-xs font-medium text-ink-soft mb-1">
                       GitHub / LinkedIn / Portfolio URL (Optional)
                     </label>
-                    <input
+                    <input id="join-field-9"
                       type="url"
                       placeholder="https://github.com/username"
                       value={formData.githubUrl}
@@ -359,10 +359,10 @@ export default function JoinPage() {
 
                   {/* Motivation */}
                   <div>
-                    <label className="block text-xs font-medium text-ink-soft mb-1">
+                    <label htmlFor="join-field-10" className="block text-xs font-medium text-ink-soft mb-1">
                       Why do you want to join? What do you hope to learn or build? *
                     </label>
-                    <textarea
+                    <textarea id="join-field-10"
                       required
                       rows={3}
                       placeholder="Tell us what excites you about systems, cloud, or automation..."

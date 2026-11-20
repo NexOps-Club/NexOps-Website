@@ -161,7 +161,7 @@ export default function AdminPage() {
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/30 text-brand">
                 <Lock className="h-6 w-6" />
               </div>
-              <h2 className="text-xl font-bold text-ink tracking-tight">NexOps Control Plane</h2>
+              <h1 className="text-xl font-bold text-ink tracking-tight">NexOps Control Plane</h1>
               <p className="text-xs text-muted font-mono">Authorized SIET Core Leads Access Only</p>
             </div>
 

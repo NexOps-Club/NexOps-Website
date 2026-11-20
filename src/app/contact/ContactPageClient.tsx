@@ -182,8 +182,8 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">Your Name *</label>
-                      <input
+                      <label htmlFor="contact-field-1" className="block text-xs font-medium text-ink-soft mb-1">Your Name *</label>
+                      <input id="contact-field-1"
                         type="text"
                         required
                         placeholder="Jane Doe"
@@ -193,8 +193,8 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-ink-soft mb-1">Your Email *</label>
-                      <input
+                      <label htmlFor="contact-field-2" className="block text-xs font-medium text-ink-soft mb-1">Your Email *</label>
+                      <input id="contact-field-2"
                         type="email"
                         required
                         placeholder="jane@example.com"
@@ -206,8 +206,8 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-ink-soft mb-1">Subject *</label>
-                    <input
+                    <label htmlFor="contact-field-3" className="block text-xs font-medium text-ink-soft mb-1">Subject *</label>
+                    <input id="contact-field-3"
                       type="text"
                       required
                       placeholder="Workshop proposal / General question / Collaboration"
@@ -218,8 +218,8 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-ink-soft mb-1">Your Message *</label>
-                    <textarea
+                    <label htmlFor="contact-field-4" className="block text-xs font-medium text-ink-soft mb-1">Your Message *</label>
+                    <textarea id="contact-field-4"
                       required
                       rows={4}
                       placeholder="Describe how we can help or collaborate..."
