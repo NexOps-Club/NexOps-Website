@@ -19,7 +19,7 @@ export const teamData: TeamMember[] = [
     category: "leads",
     yearOrDesignation: "NexOps",
     bio: "",
-    photoUrl: "",
+    photoUrl: "/team/naveen-s.jpg",
     github: "https://github.com/Naveen4421",
   },
   {
