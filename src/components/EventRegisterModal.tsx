@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { EventItem } from "@/types";
+import { StatusMessage } from "@/components/StatusMessage";
 import { X, CheckCircle, Calendar, Sparkles, Loader2 } from "lucide-react";
 
 interface EventRegisterModalProps {
@@ -16,6 +17,7 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
   const [branch, setBranch] = useState("CSE");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -69,6 +71,7 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
     try {
       const res = await fetch("/api/events/register", {
@@ -87,12 +90,12 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
       if (res.ok) {
         setIsSuccess(true);
       } else {
-        // Fallback optimistic
-        setIsSuccess(true);
+        const body = (await res.json().catch(() => null)) as { message?: string } | null;
+        setError(body?.message ?? "We could not record your registration. Please try again.");
       }
     } catch (err) {
       console.error("Error registering:", err);
-      setIsSuccess(true);
+      setError("Could not reach the server. Check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -238,6 +241,8 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
                   <option value="Other">Other Department</option>
                 </select>
               </div>
+
+              {error && <StatusMessage tone="error">{error}</StatusMessage>}
 
               <div className="pt-2">
                 <button

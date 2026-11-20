@@ -16,85 +16,45 @@ export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrolled = useSyncExternalStore(subscribeScroll, () => window.scrollY > 16, () => false);
-  // Minimal bar on every page (the whole site is dark). The floating-pill branches below are kept for reference.
-  const isHome = true;
+  // Roadmaps sits in the action buttons on desktop, so it is left out of the link capsule.
+  const desktopLinks = siteConfig.nav.filter((item) => item.href !== "/resources");
 
   return (
-    // Fixed-height header: the pill shrinks inside it, so scrolling never shifts the page.
+    // Fixed-height bar: only its background changes on scroll, so the page never shifts.
     <header
-      className={
-        isHome
-          ? `dark-stage cinema sticky top-0 z-50 h-20 w-full px-4 transition-colors duration-300 sm:px-8 lg:px-14 ${
-              scrolled ? "border-b border-line bg-canvas/85 backdrop-blur-md" : "border-b border-transparent bg-canvas"
-            }`
-          : "dark-stage sticky top-0 z-50 h-20 bg-transparent w-full px-3 pt-3 sm:px-4"
-      }
+      className={`dark-stage cinema sticky top-0 z-50 h-20 w-full px-4 transition-colors duration-300 sm:px-8 lg:px-14 ${
+        scrolled ? "border-b border-line bg-canvas/85 backdrop-blur-md" : "border-b border-transparent bg-canvas"
+      }`}
     >
-      <div
-        className={
-          isHome
-            ? "mx-auto max-w-[90rem]"
-            : `glass-surface mx-auto rounded-2xl transition-[max-width,box-shadow] duration-300 ${
-                scrolled ? "max-w-[76rem] shadow-2xl shadow-black/50" : "max-w-7xl"
-              }`
-        }
-      >
-        <div
-          className={`flex items-center justify-between ${
-            isHome ? "h-20" : `px-3 sm:px-5 transition-[height] duration-300 ${scrolled ? "h-14" : "h-16"}`
-          }`}
-        >
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group rounded-lg">
+      <div className="mx-auto max-w-[90rem]">
+        <div className="flex h-20 items-center justify-between">
+          {/* Brand logo */}
+          <Link href="/" className="group flex items-center gap-3 rounded-lg">
             <Image
               src="/logo-mark.png"
               alt=""
               width={70}
               height={42}
               preload
-              className={`object-contain transition-all duration-300 group-hover:scale-105 ${
-                scrolled ? "h-9 w-[60px]" : "h-[42px] w-[70px]"
-              }`}
+              className="h-9 w-[60px] object-contain transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="flex flex-col">
-              <span className="font-bold text-sm tracking-tight text-ink flex items-center gap-1.5">
-                {siteConfig.name}
-                {!isHome && (
-                  <span className="inline-flex items-center rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-mono text-brand border border-primary/30">
-                    SIET
-                  </span>
-                )}
-              </span>
-            </div>
+            <span className="text-sm font-bold tracking-tight text-ink">{siteConfig.name}</span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav
-            className={`hidden lg:flex items-center ${isHome ? "glass-pill gap-1 rounded-full p-1.5" : "gap-1 xl:gap-1.5"}`}
-            aria-label="Main"
-          >
-            {siteConfig.nav
-              .filter((item) => !(isHome && item.href === "/resources"))
-              .map((item) => {
+          {/* Desktop links */}
+          <nav className="glass-pill hidden items-center gap-1 rounded-full p-1.5 lg:flex" aria-label="Main">
+            {desktopLinks.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={
-                    isHome
-                      ? `whitespace-nowrap rounded-full border px-4 py-1.5 text-sm transition-all duration-200 ${
-                          isActive
-                            ? "border-white/25 bg-white/15 text-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_4px_14px_-6px_rgb(96_165_250/0.5)]"
-                            : "border-transparent text-ink-soft hover:border-white/15 hover:bg-white/10 hover:text-ink"
-                        }`
-                      : `whitespace-nowrap px-2.5 xl:px-3 py-1.5 text-sm font-medium rounded-full transition-all ${
-                          isActive
-                            ? "text-brand bg-primary/10 border border-primary/30"
-                            : "text-ink-soft border border-transparent hover:text-ink hover:bg-ink/5"
-                        }`
-                  }
+                  className={`whitespace-nowrap rounded-full border px-4 py-1.5 text-sm transition-all duration-200 ${
+                    isActive
+                      ? "border-white/25 bg-white/15 text-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_4px_14px_-6px_rgb(96_165_250/0.5)]"
+                      : "border-transparent text-ink-soft hover:border-white/15 hover:bg-white/10 hover:text-ink"
+                  }`}
                 >
                   {item.title}
                 </Link>
@@ -102,26 +62,19 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Join CTA */}
-          <div className="hidden lg:flex items-center gap-2.5">
-            {isHome && (
-              <Link
-                href="/resources"
-                className="inline-flex items-center whitespace-nowrap rounded-full glass-pill px-5 py-2 text-sm text-ink active:scale-[0.97]"
-              >
-                Roadmaps
-              </Link>
-            )}
+          {/* Desktop actions */}
+          <div className="hidden items-center gap-2.5 lg:flex">
+            <Link
+              href="/resources"
+              className="glass-pill inline-flex items-center whitespace-nowrap rounded-full px-5 py-2 text-sm text-ink active:scale-[0.97]"
+            >
+              Roadmaps
+            </Link>
             <Link
               href="/join"
-              className={
-                isHome
-                  ? "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full glass-pill px-5 py-2 text-sm text-ink active:scale-[0.97]"
-                  : "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-4 py-2 text-xs lg:text-sm font-semibold text-on-primary transition hover:bg-primary-hover active:scale-95 shadow-md shadow-primary/20"
-              }
+              className="glass-pill inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-5 py-2 text-sm text-ink active:scale-[0.97]"
             >
               <span>Join NexOps</span>
-              {!isHome && <ArrowRight className="h-4 w-4" />}
             </Link>
           </div>
 
@@ -138,13 +91,11 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Drawer (inside the pill, overlays the page) */}
+        {/* Mobile drawer: blurred sheet that overlays the page */}
         {mobileMenuOpen && (
           <div
             id="mobile-menu"
-            className={`border-t border-ink/10 px-3 pt-2 pb-5 lg:hidden ${
-              isHome ? "glass-drawer absolute inset-x-0 top-full border-b border-line px-4 sm:px-8" : ""
-            }`}
+            className="glass-drawer absolute inset-x-0 top-full border-b border-line px-4 pt-2 pb-5 sm:px-8 lg:hidden"
           >
             <div className="space-y-1">
               {siteConfig.nav.map((item) => {
@@ -166,7 +117,7 @@ export function Navbar() {
                 );
               })}
             </div>
-            <div className="mt-4 pt-4 border-t border-ink/10 flex flex-col gap-2">
+            <div className="mt-4 flex flex-col gap-2 border-t border-ink/10 pt-4">
               <Link
                 href="/join"
                 onClick={() => setMobileMenuOpen(false)}
