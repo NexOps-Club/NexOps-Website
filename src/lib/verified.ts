@@ -12,6 +12,8 @@ export const VERIFIED = {
   footerClaims: false,
   /** Project descriptions, leads and repository or demo URLs. */
   projectDetails: false,
+  /** Event listings in src/data/events.ts (titles, dates, venues, speakers). Currently sample data. */
+  events: false,
   /** Homelab hardware claims such as the "6-node" rack. */
   homelab: false,
 } as const;
