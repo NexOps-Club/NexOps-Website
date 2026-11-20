@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { MotionProvider } from "@/contexts/MotionContext";
+import { MotionCursor } from "@/components/MotionCursor";
 import "./globals.css";
 
 const inter = Inter({
@@ -80,6 +81,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <MotionProvider>
+          <MotionCursor />
           <Navbar />
           <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
             {children}

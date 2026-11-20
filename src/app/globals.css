@@ -613,3 +613,12 @@ html[data-fx="off"] .bento-tile:hover,
 html[data-fx="off"] .bento-tile:focus-within {
   transform: none;
 }
+
+/* Motion cursor (MotionCursor.tsx): hide the arrow except where typing needs it */
+html.has-motion-cursor,
+html.has-motion-cursor a,
+html.has-motion-cursor button,
+html.has-motion-cursor [role="button"],
+html.has-motion-cursor label {
+  cursor: none;
+}
