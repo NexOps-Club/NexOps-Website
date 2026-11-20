@@ -76,7 +76,8 @@ export default function TeamPage() {
         }
       />
 
-      {/* Filter Tabs */}
+      {/* Filter Tabs: shown once team members exist in src/data/team.ts */}
+      {teamData.length > 0 && (
       <div className="flex flex-wrap items-center justify-center gap-2">
         {categories.map((cat) => (
           <button
@@ -92,6 +93,7 @@ export default function TeamPage() {
           </button>
         ))}
       </div>
+      )}
 
       <h2 className="sr-only">Team members</h2>
       {/* Members Grid */}
