@@ -52,4 +52,14 @@ export const teamData: TeamMember[] = [
     photoUrl: "",
     github: "https://github.com/Smohammadnaqeeb/Smohammadnaqeeb",
   },
+  {
+    id: "poojitha",
+    name: "Poojitha",
+    role: "Member",
+    category: "core",
+    yearOrDesignation: "NexOps",
+    bio: "",
+    photoUrl: "",
+    github: "https://github.com/poojithabgit",
+  },
 ];
