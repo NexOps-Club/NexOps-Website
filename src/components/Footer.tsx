@@ -1,19 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { Terminal, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, DiscordIcon } from "@/components/Icons";
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-zinc-800/80 bg-zinc-950 text-zinc-400">
+    <footer className="dark-stage w-full border-t border-zinc-800/80 bg-zinc-950 text-zinc-400">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand & Mission */}
           <div className="space-y-4 md:col-span-1 lg:col-span-1">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400">
-                <Terminal className="h-4 w-4" />
-              </div>
+              <Image src="/logo-mark.png" alt="" width={60} height={36} className="h-9 w-[60px] object-contain" />
               <span className="font-bold text-zinc-100 text-sm">{siteConfig.name}</span>
             </div>
             <p className="text-xs text-zinc-400 leading-relaxed">
@@ -73,7 +72,7 @@ export function Footer() {
               <p className="font-medium text-zinc-300">{siteConfig.college.name}</p>
               <p>{siteConfig.college.department}</p>
               <p>{siteConfig.college.campus}</p>
-              <p className="pt-2 text-[11px] text-zinc-500">
+              <p className="pt-2 text-[11px] text-zinc-400">
                 An officially recognized student technical society.
               </p>
             </div>
@@ -85,7 +84,7 @@ export function Footer() {
               Community & Social
             </h4>
             <p className="text-xs text-zinc-400 mb-3">
-              Join 500+ student developers and cloud engineers in our discussion spaces.
+              Join student developers and cloud engineers in our discussion spaces.
             </p>
             <div className="flex items-center gap-3">
               <a
@@ -136,13 +135,28 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 border-t border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+        <div className="mt-10 border-t border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-4">
           <p>© {new Date().getFullYear()} {siteConfig.name}. Open-source under MIT License.</p>
-          <p className="flex items-center gap-1.5">
-            <span>Containerized with Docker</span>
-            <span>•</span>
-            <span>Deployed with GitOps</span>
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {siteConfig.recruitment.open && (
+              <Link
+                href="/join"
+                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-[11px] text-emerald-300 hover:bg-emerald-500/15 transition"
+              >
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Recruiting: {siteConfig.recruitment.label}</span>
+              </Link>
+            )}
+            <a
+              href={`${siteConfig.contact.github}/blob/main/.github/workflows/ci.yml`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] text-zinc-300 hover:border-white/20 hover:text-white transition"
+            >
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+              <span>Tested &amp; Docker-built by our own CI pipeline | View pipeline</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>

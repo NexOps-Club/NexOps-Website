@@ -18,13 +18,19 @@ export interface SiteConfig {
     instagram: string;
     x: string;
   };
+  /** Shown as the live indicator in the footer. Edit when the cohort changes. */
+  recruitment: {
+    open: boolean;
+    label: string;
+  };
   nav: {
     title: string;
     href: string;
   }[];
+  /** Labels only: values come from the database (live) or the site's own content data. */
   stats: {
+    id: "members" | "registrations" | "events" | "projects";
     label: string;
-    value: string;
     description: string;
   }[];
 }
@@ -37,7 +43,7 @@ export const siteConfig: SiteConfig = {
     "The premier student-led technical society for Cloud Computing, Computer Networking, Systems Engineering, and modern DevOps practices at SIET Tumakuru.",
   college: {
     name: "Shridevi Institute of Engineering and Technology (SIET)",
-    department: "Department of Computer Science & Engineering",
+    department: "Departments of Artificial Intelligence & Data Science and Artificial Intelligence & Machine Learning",
     campus: "NH-4, Sira Road",
     city: "Tumakuru, Karnataka 572106",
   },
@@ -50,6 +56,7 @@ export const siteConfig: SiteConfig = {
     instagram: "https://instagram.com/nexops_siet",
     x: "https://x.com/nexops_siet",
   },
+  recruitment: { open: true, label: "Fall Cohort" },
   nav: [
     { title: "Home", href: "/" },
     { title: "About", href: "/about" },
@@ -60,9 +67,9 @@ export const siteConfig: SiteConfig = {
     { title: "Contact", href: "/contact" },
   ],
   stats: [
-    { label: "Active Members", value: "250+", description: "Students actively learning & building" },
-    { label: "Workshops & CTFs", value: "18+", description: "Hands-on labs and technical sessions" },
-    { label: "Open-Source Projects", value: "10+", description: "Production tools built by members" },
-    { label: "Placements & Interns", value: "35+", description: "In Cloud, SRE, and Infrastructure roles" },
+    { id: "members", label: "Accepted Members", description: "Applications accepted into the club" },
+    { id: "registrations", label: "Event Registrations", description: "Seats booked across our sessions" },
+    { id: "events", label: "Events Hosted", description: "Workshops, talks & CTFs run so far" },
+    { id: "projects", label: "Member Projects", description: "Tools built by club members" },
   ],
 };

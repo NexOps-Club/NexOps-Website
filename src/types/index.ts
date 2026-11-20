@@ -1,9 +1,12 @@
+export type EventLevel = "beginner" | "coder" | "builder";
+
 export interface EventItem {
   id: string;
   title: string;
   slug: string;
   category: "Workshop" | "Bootcamp" | "Talk" | "Hackathon" | "CTF";
   status: "upcoming" | "past";
+  level: EventLevel;
   date: string; // ISO date string or formatted date
   time: string;
   venue: string;
@@ -54,7 +57,6 @@ export interface ProjectItem {
   demoUrl?: string;
   lead: string;
   featured: boolean;
-  stars?: number;
 }
 
 export interface RoadmapStep {

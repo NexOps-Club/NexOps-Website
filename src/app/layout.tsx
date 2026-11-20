@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { AmbientBackground } from "@/components/AmbientBackground";
 import { MotionProvider } from "@/contexts/MotionContext";
 import "./globals.css";
 
@@ -56,6 +57,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 selection:bg-emerald-500 selection:text-zinc-950">
+        <AmbientBackground />
         <MotionProvider>
           <Navbar />
           <main className="flex-1">{children}</main>

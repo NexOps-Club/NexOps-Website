@@ -1,8 +1,51 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #f4f4f5;
+  --background: #fbf8f3;
+  --foreground: #1c1812;
+
+  /* Brand identity */
+  --brand-indigo: #4f46e5;
+  --brand-coral: #e8590c;
+  --brand-ocean: #0b7ab5;
+
+  /* Glass surfaces */
+  --glass-bg: rgb(255 253 249 / 0.72);
+  --glass-bg-strong: rgb(255 253 249 / 0.88);
+  --glass-card-bg: linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.65)), rgb(251 248 243 / 0.9);
+  --glass-border: rgb(28 24 18 / 0.1);
+  --glass-highlight: inset 0 1px 0 rgb(255 255 255 / 0.8);
+  --glass-blur: blur(18px) saturate(140%);
+
+  /* Fallback surface when effects are off (Tailwind slate-900 @ 80%) */
+  --solid-surface: rgb(255 253 249 / 0.95);
+
+  --focus-ring: #4f46e5;
+}
+
+@theme {
+  /* "Paper & Indigo": light theme. Existing emerald/cyan/sky/zinc classes are remapped here:
+     emerald = indigo (primary), cyan = coral, sky = ocean blue, zinc = inverted warm paper/ink scale
+     (zinc-950 is the page paper, zinc-100 the ink), and white = ink so text-white headings read dark.
+     Dark sections opt back in with .dark-stage below. */
+  --color-white: #1c1812;
+
+  --color-emerald-50: #eef2ff; --color-emerald-100: #e0e7ff; --color-emerald-200: #c7d2fe;
+  --color-emerald-300: #3730a3; --color-emerald-400: #4f46e5; --color-emerald-500: #4338ca;
+  --color-emerald-600: #3730a3; --color-emerald-700: #312e81; --color-emerald-800: #282565;
+  --color-emerald-900: #1e1b4b; --color-emerald-950: #eef2ff;
+
+  --color-cyan-300: #b8390b; --color-cyan-400: #d9480f; --color-cyan-500: #e8590c;
+  --color-cyan-600: #c2410c; --color-cyan-700: #9a3412;
+  --color-sky-300: #075985; --color-sky-400: #0b7ab5; --color-sky-500: #0a6aa1;
+  --color-violet-300: #5b21b6; --color-violet-400: #6d28d9; --color-violet-500: #7c3aed;
+  --color-indigo-400: #4f46e5; --color-indigo-500: #4338ca;
+  --color-rose-300: #9f1239; --color-rose-400: #be123c; --color-rose-500: #e11d48;
+
+  --color-zinc-50: #100d09; --color-zinc-100: #1c1812; --color-zinc-200: #2f2a22;
+  --color-zinc-300: #4b4439; --color-zinc-400: #6b6254; --color-zinc-500: #8a8070;
+  --color-zinc-600: #a89f8e; --color-zinc-700: #cfc6b6; --color-zinc-800: #e6dfd3;
+  --color-zinc-900: #f3eee6; --color-zinc-950: #fbf8f3;
 }
 
 @theme inline {
@@ -19,18 +62,250 @@ body {
   overflow-x: hidden;
 }
 
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 /* Custom subtle scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #cfc6b6;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #a89f8e;
+}
+
+/* ---------- Ambient background ---------- */
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+  animation: aurora-drift 28s ease-in-out infinite alternate;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(28 24 18 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(28 24 18 / 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 20%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 20%, #000 30%, transparent 75%);
+}
+
+@keyframes aurora-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, 3%, 0) scale(1.08); }
+  100% { transform: translate3d(-3%, -2%, 0) scale(0.96); }
+}
+
+/* ---------- Glass primitives ---------- */
+
+/* Large surfaces only: navbar, hero terminal, modals, feature panels */
+.glass-surface {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), 0 20px 50px -24px rgb(60 50 120 / 0.28);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}
+
+/* Cards and tiles: translucent, no backdrop-filter */
+.glass-card {
+  position: relative;
+  background: var(--glass-card-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), 0 12px 30px -20px rgb(60 50 120 / 0.3);
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease-out;
+}
+.glass-card:hover,
+.glass-card:focus-within {
+  border-color: rgb(79 70 229 / 0.35);
+  box-shadow: var(--glass-highlight), 0 18px 40px -18px rgb(79 70 229 / 0.25);
+}
+
+/* Cursor-follow glow; --gx/--gy are set from pointer position */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background: radial-gradient(320px circle at var(--gx, 50%) var(--gy, 0%), rgb(79 70 229 / 0.12), rgb(34 211 238 / 0.05) 40%, transparent 70%);
+}
+.glass-card:hover::after {
+  opacity: 1;
+}
+
+/* Frosted form fields with emerald focus ring */
+.glass-input {
+  background: rgb(9 9 11 / 0.55);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  color: #f4f4f5;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+}
+.glass-input::placeholder {
+  color: #8b8b94;
+}
+.glass-input:hover {
+  border-color: rgb(255 255 255 / 0.18);
+}
+.glass-input:focus,
+.glass-input:focus-visible {
+  outline: none;
+  background: rgb(9 9 11 / 0.75);
+  border-color: var(--brand-emerald);
+  box-shadow: 0 0 0 3px rgb(79 70 229 / 0.35);
+}
+.glass-input option {
+  background: #0c0e11;
+  color: #f4f4f5;
+}
+
+/* Floating tech chips: `translate` animates, `transform` carries pointer parallax */
+.float-chip {
+  animation: chip-float 6s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * -0.8s);
+  transform: translate3d(calc(var(--mx, 0) * var(--depth, 4) * 1px), calc(var(--my, 0) * var(--depth, 4) * 1px), 0);
+  transition: transform 300ms ease-out, border-color 200ms ease;
+}
+
+@keyframes chip-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -3px; }
+}
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgb(79 70 229 / 0.55); }
+  70% { box-shadow: 0 0 0 7px rgb(79 70 229 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(79 70 229 / 0); }
+}
+.pulse-dot {
+  animation: pulse-dot 2.2s ease-out infinite;
+}
+
+/* ---------- Hero 3D network ---------- */
+
+/* Fade the scene out over its left 25% so it never reaches the headline column */
+.hero-network {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 25%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 25%);
+}
+
+.hero-vignette {
+  background:
+    radial-gradient(ellipse 80% 85% at 58% 50%, transparent 62%, var(--background) 112%),
+    linear-gradient(to bottom, var(--background), transparent 12%, transparent 88%, var(--background));
+}
+
+@keyframes net-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Domain anchor labels (positioned from the render loop) and SVG anchor focus ring */
+.domain-label {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  color: #e2e0f0;
+  background: rgb(15 12 36 / 0.75);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  transition: color 150ms, border-color 150ms, box-shadow 150ms;
+}
+.domain-label[data-tone="emerald"] { --dl: 255 179 71; }
+.domain-label[data-tone="cyan"] { --dl: 255 138 91; }
+.domain-label[data-tone="violet"] { --dl: 94 234 212; }
+.domain-label[data-hover="1"],
+.domain-label[data-active="1"] {
+  color: #fff;
+  border-color: rgb(var(--dl) / 0.8);
+  box-shadow: 0 0 14px rgb(var(--dl) / 0.4);
+}
+.domain-node { outline: none; }
+.domain-node:focus-visible > circle:first-child { stroke: #fff; stroke-width: 2; }
+
+/* ---------- Fallbacks ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-surface,
+  .glass-card {
+    background: var(--solid-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .aurora-blob,
+  .float-chip,
+  .pulse-dot {
+    animation: none;
+  }
+  .float-chip {
+    transform: none;
+  }
+  .glass-card {
+    transition: none;
+  }
+}
+
+/* Effects off (set from prefers-reduced-motion): solid surfaces, no blur, no motion */
+html[data-fx="off"] .glass-surface,
+html[data-fx="off"] .glass-card {
+  background: var(--solid-surface);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+html[data-fx="off"] .aurora-blob,
+html[data-fx="off"] .float-chip,
+html[data-fx="off"] .pulse-dot {
+  animation: none;
+}
+html[data-fx="off"] .float-chip {
+  transform: none;
+}
+html[data-fx="off"] .glass-card::after {
+  display: none;
+}
+
+/* ---------- Dark stage: hero and footer keep a deep indigo-ink look for the 3D scene ---------- */
+.dark-stage {
+  --background: #0f0c24;
+  --foreground: #f0effa;
+  --glass-bg: rgb(23 19 58 / 0.62);
+  --glass-bg-strong: rgb(15 12 36 / 0.8);
+  --glass-card-bg: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02)), rgb(18 14 44 / 0.82);
+  --glass-border: rgb(255 255 255 / 0.12);
+  --glass-highlight: inset 0 1px 0 rgb(255 255 255 / 0.07);
+  --solid-surface: rgb(23 19 58 / 0.92);
+  --focus-ring: #a5b4fc;
+  --color-white: #ffffff;
+  --color-zinc-50: #f8f8fd; --color-zinc-100: #f0effa; --color-zinc-200: #e2e0f0;
+  --color-zinc-300: #cbc8e3; --color-zinc-400: #a8a4cc; --color-zinc-500: #7e79ad;
+  --color-zinc-600: #5a5490; --color-zinc-700: #3a3470; --color-zinc-800: #241f4f;
+  --color-zinc-900: #17133a; --color-zinc-950: #0f0c24;
+  --color-emerald-300: #c7d2fe; --color-emerald-400: #a5b4fc; --color-emerald-500: #818cf8;
+  --color-emerald-600: #6366f1; --color-emerald-950: #1e1b4b;
+  --color-cyan-300: #ffb599; --color-cyan-400: #ff8a5b; --color-cyan-500: #ff7a45;
+  --color-sky-400: #7dd3fc; --color-sky-500: #38bdf8;
+  --color-violet-300: #99f6e4; --color-violet-400: #5eead4; --color-violet-500: #2dd4bf;
+  --color-rose-400: #fb7185; --color-rose-500: #f43f5e;
+  background: var(--background);
+  color: var(--foreground);
 }

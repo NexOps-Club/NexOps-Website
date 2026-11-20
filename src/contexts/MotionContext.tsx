@@ -1,31 +1,23 @@
 "use client";
 
-import React, { createContext, useContext, useCallback, useSyncExternalStore } from "react";
+import React, { createContext, useContext, useEffect, useSyncExternalStore } from "react";
 
 interface MotionContextType {
-  reduce3D: boolean;
-  toggleReduce3D: () => void;
-  isLowPower: boolean;
+  prefersReducedMotion: boolean;
+  /** 3D and motion effects are on by default; only the OS "reduce motion" setting turns them off. */
+  effectsOff: boolean;
 }
 
 const MotionContext = createContext<MotionContextType>({
-  reduce3D: false,
-  toggleReduce3D: () => {},
-  isLowPower: false,
+  prefersReducedMotion: false,
+  effectsOff: false,
 });
 
-function getReduce3DSnapshot(): boolean {
-  if (typeof window === "undefined") return false;
-  const saved = localStorage.getItem("nexops_reduce_3d");
-  if (saved !== null) return saved === "true";
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const lowCores = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 2;
-  return prefersReduced || lowCores;
-}
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
-function getLowPowerSnapshot(): boolean {
-  if (typeof navigator === "undefined") return false;
-  return typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 2;
+function getReducedMotionSnapshot(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
 }
 
 function getServerSnapshot(): boolean {
@@ -34,33 +26,22 @@ function getServerSnapshot(): boolean {
 
 function subscribe(callback: () => void): () => void {
   if (typeof window === "undefined") return () => {};
-  window.addEventListener("storage", callback);
-  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
   mediaQuery.addEventListener("change", callback);
-
-  return () => {
-    window.removeEventListener("storage", callback);
-    mediaQuery.removeEventListener("change", callback);
-  };
-}
-
-function dummySubscribe(): () => void {
-  return () => {};
+  return () => mediaQuery.removeEventListener("change", callback);
 }
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
-  const reduce3D = useSyncExternalStore(subscribe, getReduce3DSnapshot, getServerSnapshot);
-  const isLowPower = useSyncExternalStore(dummySubscribe, getLowPowerSnapshot, getServerSnapshot);
+  const prefersReducedMotion = useSyncExternalStore(subscribe, getReducedMotionSnapshot, getServerSnapshot);
+  const effectsOff = prefersReducedMotion;
 
-  const toggleReduce3D = useCallback(() => {
-    const current = getReduce3DSnapshot();
-    const next = !current;
-    localStorage.setItem("nexops_reduce_3d", String(next));
-    window.dispatchEvent(new Event("storage"));
-  }, []);
+  // Drives the CSS fallbacks (solid surfaces, no blur, no aurora animation).
+  useEffect(() => {
+    document.documentElement.dataset.fx = effectsOff ? "off" : "on";
+  }, [effectsOff]);
 
   return (
-    <MotionContext.Provider value={{ reduce3D, toggleReduce3D, isLowPower }}>
+    <MotionContext.Provider value={{ prefersReducedMotion, effectsOff }}>
       {children}
     </MotionContext.Provider>
   );

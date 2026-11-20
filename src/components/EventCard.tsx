@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { EventItem } from "@/types";
+import { GlassCard } from "@/components/GlassCard";
+import { LEVELS, LEVEL_LABEL } from "@/data/levels";
 import { Calendar, Clock, MapPin, UserCheck, CalendarPlus } from "lucide-react";
 
 interface EventCardProps {
@@ -22,7 +24,7 @@ export function EventCard({ event, onRegister }: EventCardProps) {
   };
 
   return (
-    <div className="flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden hover:border-zinc-700 transition-all duration-300 group shadow-lg">
+    <GlassCard title={`events/${event.slug}`}>
       {/* Event Banner */}
       <div className="relative h-48 w-full overflow-hidden bg-zinc-950">
         {event.posterImage ? (
@@ -42,11 +44,14 @@ export function EventCard({ event, onRegister }: EventCardProps) {
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex items-center gap-2">
-          <span className="rounded-md bg-zinc-900/90 px-2.5 py-1 text-[11px] font-semibold text-emerald-400 border border-emerald-500/30 backdrop-blur-md">
+          <span className="rounded-md bg-zinc-950/85 px-2.5 py-1 text-[11px] font-semibold text-emerald-400 border border-emerald-500/30">
             {event.category}
           </span>
+          <span className="rounded-md bg-zinc-950/85 px-2.5 py-1 text-[11px] font-mono text-zinc-200 border border-white/15">
+            {LEVELS.find((l) => l.id === event.level)?.index}{" // "}{LEVEL_LABEL[event.level]}
+          </span>
           {isUpcoming && (
-            <span className="flex items-center gap-1.5 rounded-md bg-emerald-500/20 px-2.5 py-1 text-[11px] font-medium text-emerald-300 border border-emerald-500/40 backdrop-blur-md">
+            <span className="flex items-center gap-1.5 rounded-md bg-emerald-500/20 px-2.5 py-1 text-[11px] font-medium text-emerald-300 border border-emerald-500/40">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Upcoming
             </span>
@@ -66,7 +71,7 @@ export function EventCard({ event, onRegister }: EventCardProps) {
         </div>
 
         {/* Date, Time, Venue */}
-        <div className="space-y-1.5 text-xs text-zinc-400 pt-1 border-t border-zinc-800/80">
+        <div className="space-y-1.5 text-xs text-zinc-400 pt-1 border-t border-white/10">
           <div className="flex items-center gap-2">
             <Calendar className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
             <span>{event.date}</span>
@@ -83,7 +88,7 @@ export function EventCard({ event, onRegister }: EventCardProps) {
 
         {/* Instructor */}
         {event.instructor && (
-          <div className="rounded-lg bg-zinc-950/60 p-2.5 border border-zinc-800/60 flex items-center gap-2.5 text-xs">
+          <div className="rounded-lg bg-black/25 p-2.5 border border-white/10 flex items-center gap-2.5 text-xs">
             <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs shrink-0">
               {event.instructor.name.charAt(0)}
             </div>
@@ -99,7 +104,7 @@ export function EventCard({ event, onRegister }: EventCardProps) {
           {event.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded bg-zinc-800/60 px-2 py-0.5 text-[10px] font-mono text-zinc-400"
+              className="rounded bg-white/5 px-2 py-0.5 text-[10px] font-mono text-zinc-300"
             >
               #{tag}
             </span>
@@ -107,7 +112,7 @@ export function EventCard({ event, onRegister }: EventCardProps) {
         </div>
 
         {/* Actions */}
-        <div className="mt-auto pt-3 flex items-center gap-2 border-t border-zinc-800/80">
+        <div className="mt-auto pt-3 flex items-center gap-2 border-t border-white/10">
           {isUpcoming && event.registrationOpen ? (
             <button
               onClick={() => onRegister(event)}
@@ -117,7 +122,7 @@ export function EventCard({ event, onRegister }: EventCardProps) {
               <span>Register Now</span>
             </button>
           ) : (
-            <div className="flex-1 rounded-lg bg-zinc-800/40 py-2 px-3 text-center text-xs font-medium text-zinc-500">
+            <div className="flex-1 rounded-lg bg-white/5 py-2 px-3 text-center text-xs font-medium text-zinc-400">
               Event Concluded
             </div>
           )}
@@ -128,14 +133,15 @@ export function EventCard({ event, onRegister }: EventCardProps) {
               target="_blank"
               rel="noreferrer"
               title="Add to Google Calendar"
-              className="rounded-lg border border-zinc-700 bg-zinc-800 p-2 text-zinc-300 hover:text-white hover:bg-zinc-700 transition"
+              aria-label={`Add ${event.title} to Google Calendar`}
+              className="rounded-lg border border-white/15 bg-white/5 p-2 text-zinc-200 hover:text-white hover:bg-white/10 transition"
             >
               <CalendarPlus className="h-4 w-4" />
             </a>
           )}
         </div>
       </div>
-    </div>
+    </GlassCard>
   );
 }
 

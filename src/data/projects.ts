@@ -12,7 +12,6 @@ export const projectsData: ProjectItem[] = [
     demoUrl: "https://sandbox.devopsclub.edu",
     lead: "Vikramaditya Rao",
     featured: true,
-    stars: 142,
   },
   {
     id: "proj-02",
@@ -24,7 +23,6 @@ export const projectsData: ProjectItem[] = [
     githubUrl: "https://github.com/cloud-devops-club/autogitops",
     lead: "Aditya Nair",
     featured: true,
-    stars: 88,
   },
   {
     id: "proj-03",
@@ -37,7 +35,6 @@ export const projectsData: ProjectItem[] = [
     demoUrl: "https://grafana.devopsclub.edu",
     lead: "Karan Singhania",
     featured: true,
-    stars: 95,
   },
   {
     id: "proj-04",
@@ -49,7 +46,6 @@ export const projectsData: ProjectItem[] = [
     githubUrl: "https://github.com/cloud-devops-club/secscan-cli",
     lead: "Pooja Hegde",
     featured: false,
-    stars: 64,
   },
 ];
 

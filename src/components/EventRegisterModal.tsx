@@ -133,7 +133,7 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
                   placeholder="e.g. Alex Chen"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                 />
               </div>
 
@@ -148,7 +148,7 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
                     placeholder="student@college.edu"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                   />
                 </div>
                 <div>
@@ -161,7 +161,7 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
                     placeholder="e.g. 23BCSE102"
                     value={studentId}
                     onChange={(e) => setStudentId(e.target.value)}
-                    className="w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                   />
                 </div>
               </div>
@@ -173,7 +173,7 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
                 <select
                   value={branch}
                   onChange={(e) => setBranch(e.target.value)}
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                 >
                   <option value="CSE">Computer Science & Engineering</option>
                   <option value="IT">Information Technology</option>

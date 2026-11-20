@@ -4,6 +4,7 @@ import { useState } from "react";
 import { eventsData } from "@/data/events";
 import { EventCard } from "@/components/EventCard";
 import { EventRegisterModal } from "@/components/EventRegisterModal";
+import { LevelFilter, type LevelFilterValue } from "@/components/LevelFilter";
 import { EventItem } from "@/types";
 import { Calendar, Search, Filter } from "lucide-react";
 
@@ -12,6 +13,7 @@ export default function EventsPage() {
   const [statusTab, setStatusTab] = useState<"all" | "upcoming" | "past">("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [level, setLevel] = useState<LevelFilterValue>("all");
 
   const categories = ["All", "Workshop", "Bootcamp", "Talk", "CTF"];
 
@@ -27,7 +29,9 @@ export default function EventsPage() {
       evt.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       evt.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    return matchesStatus && matchesCategory && matchesSearch;
+    const matchesLevel = level === "all" ? true : evt.level === level;
+
+    return matchesStatus && matchesCategory && matchesSearch && matchesLevel;
   });
 
   return (
@@ -46,6 +50,9 @@ export default function EventsPage() {
           networking protocols, Kubernetes clusters, and DevSecOps CTFs.
         </p>
       </div>
+
+      {/* Pick your track */}
+      <LevelFilter value={level} onChange={setLevel} />
 
       {/* Filter and Search Bar */}
       <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-6 space-y-4 shadow-lg backdrop-blur-md">

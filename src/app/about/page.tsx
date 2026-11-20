@@ -6,7 +6,6 @@ import {
   Server,
   HeartHandshake,
   ArrowRight,
-  Building2,
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -24,7 +23,7 @@ export default function AboutPage() {
     {
       year: "2025",
       title: "First Cloud CTF & Hackathon",
-      desc: "Hosted 'HackTheCloud' with 400+ participants across 18 universities, sponsored by cloud industry partners.",
+      desc: "Hosted 'HackTheCloud', our first cloud CTF and hackathon, sponsored by cloud industry partners.",
     },
     {
       year: "2026",
@@ -93,33 +92,6 @@ export default function AboutPage() {
             exceptional cloud architects, SREs, and open-source contributors who build reliable, secure,
             and scalable software for the world.
           </p>
-        </div>
-      </div>
-
-      {/* Affiliation & Department */}
-      <div className="rounded-2xl border border-zinc-800 bg-gradient-to-r from-zinc-900 via-zinc-900/70 to-zinc-950 p-8 sm:p-10">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
-              <Building2 className="h-4 w-4" />
-              <span>Institutional Affiliation</span>
-            </div>
-            <h3 className="text-xl font-bold text-zinc-100">{siteConfig.college.name}</h3>
-            <p className="text-sm text-zinc-400">
-              {siteConfig.college.department} • {siteConfig.college.campus}
-            </p>
-            <p className="text-xs text-zinc-400 max-w-xl pt-1">
-              Operated under the guidance of CSE faculty coordinators with generous lab access,
-              compute resources, and official academic backing.
-            </p>
-          </div>
-          <Link
-            href="/team"
-            className="inline-flex items-center gap-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 px-4 py-2.5 text-xs font-semibold text-zinc-200 transition"
-          >
-            <span>Meet Faculty & Leads</span>
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </div>
 

@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+// React only needs eval in development (debug stacks); production never uses it.
+const isDev = process.env.NODE_ENV === "development";
+
 const securityHeaders = [
   {
     key: "X-DNS-Prefetch-Control",
@@ -29,7 +32,7 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://challenges.cloudflare.com",
+      `script-src 'self'${isDev ? " 'unsafe-eval'" : ""} 'unsafe-inline' https://challenges.cloudflare.com`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://images.unsplash.com",
       "font-src 'self' data:",

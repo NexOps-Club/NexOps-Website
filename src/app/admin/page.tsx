@@ -185,7 +185,7 @@ export default function AdminPage() {
                 placeholder="••••••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-mono"
+                className="glass-input w-full rounded-lg px-3.5 py-2.5 text-sm font-mono"
               />
             </div>
 
@@ -331,7 +331,7 @@ export default function AdminPage() {
             placeholder="Search records..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-900 pl-8 pr-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500"
+            className="glass-input w-full rounded-lg pl-8 pr-3 py-1.5 text-xs"
           />
         </div>
       </div>

@@ -6,6 +6,7 @@ import { teamData } from "@/data/team";
 import { Mail, Sparkles, ArrowRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/Icons";
 import Link from "next/link";
+import { GlassCard } from "@/components/GlassCard";
 
 type CategoryFilter = "all" | "faculty" | "leads" | "core";
 
@@ -66,10 +67,7 @@ export default function TeamPage() {
       {/* Members Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredMembers.map((member) => (
-          <div
-            key={member.id}
-            className="flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 overflow-hidden hover:border-zinc-700 transition group hover:shadow-xl hover:shadow-emerald-950/20"
-          >
+          <GlassCard key={member.id} title={`~/team/${member.id}`}>
             {/* Member Photo */}
             <div className="relative h-56 w-full overflow-hidden bg-zinc-950">
               <Image
@@ -81,7 +79,7 @@ export default function TeamPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
               {member.track && (
-                <span className="absolute top-3 left-3 rounded bg-zinc-900/90 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-mono text-emerald-400 backdrop-blur-md z-10">
+                <span className="absolute top-3 left-3 rounded bg-zinc-900/90 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-mono text-emerald-400 z-10">
                   {member.track}
                 </span>
               )}
@@ -107,7 +105,7 @@ export default function TeamPage() {
                   {member.badges.map((b) => (
                     <span
                       key={b}
-                      className="rounded bg-zinc-800/80 px-2 py-0.5 text-[9px] font-mono text-zinc-300"
+                      className="rounded bg-white/5 px-2 py-0.5 text-[10px] font-mono text-zinc-300"
                     >
                       {b}
                     </span>
@@ -116,13 +114,13 @@ export default function TeamPage() {
               )}
 
               {/* Social Icons */}
-              <div className="pt-3 border-t border-zinc-800 flex items-center gap-2">
+              <div className="pt-3 border-t border-white/10 flex items-center gap-2">
                 {member.github && (
                   <a
                     href={member.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
+                    className="rounded p-1.5 text-zinc-400 hover:text-white hover:bg-white/10 transition"
                     aria-label={`${member.name} GitHub`}
                   >
                     <GithubIcon className="h-4 w-4" />
@@ -133,7 +131,7 @@ export default function TeamPage() {
                     href={member.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
+                    className="rounded p-1.5 text-zinc-400 hover:text-white hover:bg-white/10 transition"
                     aria-label={`${member.name} LinkedIn`}
                   >
                     <LinkedinIcon className="h-4 w-4" />
@@ -142,7 +140,7 @@ export default function TeamPage() {
                 {member.email && (
                   <a
                     href={`mailto:${member.email}`}
-                    className="rounded p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
+                    className="rounded p-1.5 text-zinc-400 hover:text-white hover:bg-white/10 transition"
                     aria-label={`${member.name} Email`}
                   >
                     <Mail className="h-4 w-4" />
@@ -150,7 +148,7 @@ export default function TeamPage() {
                 )}
               </div>
             </div>
-          </div>
+          </GlassCard>
         ))}
       </div>
 

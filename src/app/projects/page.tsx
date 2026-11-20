@@ -5,12 +5,12 @@ import { projectsData } from "@/data/projects";
 import {
   Code2,
   ExternalLink,
-  Star,
   Search,
   ArrowRight,
 } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
 import Link from "next/link";
+import { GlassCard } from "@/components/GlassCard";
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -78,7 +78,7 @@ export default function ProjectsPage() {
             placeholder="Search projects or stack..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-950 pl-9 pr-3 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+            className="glass-input w-full rounded-lg pl-9 pr-3 py-2 text-xs"
           />
         </div>
       </div>
@@ -86,22 +86,13 @@ export default function ProjectsPage() {
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredProjects.map((project) => (
-          <div
-            key={project.id}
-            className="flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 space-y-5 hover:border-zinc-700 transition group hover:shadow-xl hover:shadow-cyan-950/20"
-          >
+          <GlassCard key={project.id} title={`repo/${project.id}`}>
+            <div className="flex flex-1 flex-col p-6 space-y-5">
             <div className="flex items-center justify-between">
               <span className="rounded bg-cyan-500/10 border border-cyan-500/30 px-2.5 py-0.5 text-xs font-mono text-cyan-400">
                 {project.category}
               </span>
               <div className="flex items-center gap-2 text-xs text-zinc-400">
-                {project.stars && (
-                  <span className="flex items-center gap-1 font-mono">
-                    <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
-                    {project.stars}
-                  </span>
-                )}
-                <span>•</span>
                 <span>Lead: {project.lead}</span>
               </div>
             </div>
@@ -120,7 +111,7 @@ export default function ProjectsPage() {
               {project.techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded bg-zinc-800/80 px-2 py-0.5 text-[11px] font-mono text-zinc-300"
+                  className="rounded bg-white/5 px-2 py-0.5 text-[11px] font-mono text-zinc-300"
                 >
                   {tech}
                 </span>
@@ -128,7 +119,7 @@ export default function ProjectsPage() {
             </div>
 
             {/* Links */}
-            <div className="mt-auto pt-4 border-t border-zinc-800 flex items-center justify-between text-xs">
+            <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-xs">
               <a
                 href={project.githubUrl}
                 target="_blank"
@@ -152,7 +143,8 @@ export default function ProjectsPage() {
                 </a>
               )}
             </div>
-          </div>
+            </div>
+          </GlassCard>
         ))}
       </div>
 

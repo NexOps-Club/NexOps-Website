@@ -249,7 +249,7 @@ export default function JoinPage() {
                       placeholder="e.g. Maya Sharma"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                     />
                   </div>
                   <div>
@@ -262,7 +262,7 @@ export default function JoinPage() {
                       placeholder="maya@college.edu"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                     />
                   </div>
                 </div>
@@ -278,7 +278,7 @@ export default function JoinPage() {
                       placeholder="+91 98765 43210"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                     />
                   </div>
                   <div>
@@ -291,7 +291,7 @@ export default function JoinPage() {
                       placeholder="23CSE401"
                       value={formData.studentId}
                       onChange={(e) => setFormData({ ...formData, studentId: e.target.value })}
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                     />
                   </div>
                 </div>
@@ -305,7 +305,7 @@ export default function JoinPage() {
                     <select
                       value={formData.year}
                       onChange={(e) => setFormData({ ...formData, year: e.target.value })}
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                     >
                       <option value="1st Year">1st Year (Freshman)</option>
                       <option value="2nd Year">2nd Year (Sophomore)</option>
@@ -321,7 +321,7 @@ export default function JoinPage() {
                     <select
                       value={formData.branch}
                       onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                     >
                       <option value="CSE">Computer Science & Engineering</option>
                       <option value="IT">Information Technology</option>
@@ -342,7 +342,7 @@ export default function JoinPage() {
                     <select
                       value={formData.track}
                       onChange={(e) => setFormData({ ...formData, track: e.target.value })}
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                     >
                       <option value="DevOps & CI/CD">DevOps & CI/CD Pipelines</option>
                       <option value="Cloud Computing">Cloud Computing (AWS/GCP)</option>
@@ -360,7 +360,7 @@ export default function JoinPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, experienceLevel: e.target.value })
                       }
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                     >
                       <option value="Curious Beginner">Curious Beginner (Zero CLI experience)</option>
                       <option value="Basic Git & Linux">Basic Git & Linux commands</option>
@@ -380,7 +380,7 @@ export default function JoinPage() {
                     placeholder="https://github.com/username"
                     value={formData.githubUrl}
                     onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
-                    className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                   />
                 </div>
 
@@ -395,7 +395,7 @@ export default function JoinPage() {
                     placeholder="Tell us what excites you about systems, cloud, or automation..."
                     value={formData.motivation}
                     onChange={(e) => setFormData({ ...formData, motivation: e.target.value })}
-                    className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="glass-input w-full rounded-lg px-3 py-2 text-sm"
                   />
                 </div>
 
