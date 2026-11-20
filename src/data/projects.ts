@@ -24,4 +24,15 @@ export const projectsData: ProjectItem[] = [
     lead: "Naveen S",
     featured: true,
   },
+  {
+    id: "ci-cd-pipeline",
+    title: "CI/CD Pipeline for a Node.js App",
+    description:
+      "A GitHub Actions pipeline that installs and tests a Node.js Express app, builds a Docker image, pushes it to Docker Hub and deploys it to Kubernetes, then checks the rollout and rolls back automatically if anything fails.",
+    category: "Automation",
+    techStack: ["GitHub Actions", "Docker", "Kubernetes", "Node.js", "Express"],
+    githubUrl: "https://github.com/Naveen4421/CI-CD_pipeline",
+    lead: "Naveen S",
+    featured: true,
+  },
 ];
