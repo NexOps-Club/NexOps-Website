@@ -4,6 +4,7 @@ import { GlassCard } from "@/components/GlassCard";
 import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import { siteConfig } from "@/config/site";
+import { VERIFIED } from "@/lib/verified";
 import { faqsData } from "@/data/faqs";
 import {
   Mail,
@@ -67,10 +68,12 @@ export default function ContactPage() {
         {/* Left: Direct Channels & Cards */}
         <div className="lg:col-span-5 space-y-6">
           {/* Community Channels */}
+          {(VERIFIED.socialLinks || VERIFIED.contactEmail) && (
           <div className="panel p-6 space-y-4">
             <h2 className="text-base font-bold text-ink">Direct Community Channels</h2>
 
             <div className="space-y-3 text-xs">
+              {VERIFIED.socialLinks && (
               <a
                 href={siteConfig.contact.discord}
                 target="_blank"
@@ -88,7 +91,9 @@ export default function ContactPage() {
                 </div>
                 <ExternalLink className="h-4 w-4 text-subtle group-hover:text-ink-soft" />
               </a>
+              )}
 
+              {VERIFIED.socialLinks && (
               <a
                 href={siteConfig.contact.whatsapp}
                 target="_blank"
@@ -106,7 +111,9 @@ export default function ContactPage() {
                 </div>
                 <ExternalLink className="h-4 w-4 text-subtle group-hover:text-ink-soft" />
               </a>
+              )}
 
+              {VERIFIED.contactEmail && (
               <a
                 href={`mailto:${siteConfig.contact.email}`}
                 className="flex items-center justify-between p-3 rounded-xl bg-canvas/70 border border-line hover:border-primary/50 transition group"
@@ -122,8 +129,10 @@ export default function ContactPage() {
                 </div>
                 <ExternalLink className="h-4 w-4 text-subtle group-hover:text-ink-soft" />
               </a>
+              )}
             </div>
           </div>
+          )}
 
           {/* Physical Address */}
           <div className="panel p-6 space-y-3">
@@ -135,7 +144,9 @@ export default function ContactPage() {
               <p className="font-semibold text-ink-soft">{siteConfig.college.name}</p>
               <p>{siteConfig.college.department}</p>
               <p>{siteConfig.college.campus}</p>
-              <p className="text-subtle pt-1">Office Hours: Mondays & Thursdays, 4:00 PM – 6:00 PM IST</p>
+              {VERIFIED.contactDetails && (
+                <p className="text-subtle pt-1">Office Hours: Mondays & Thursdays, 4:00 PM – 6:00 PM IST</p>
+              )}
             </div>
           </div>
         </div>

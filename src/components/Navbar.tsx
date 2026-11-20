@@ -16,8 +16,8 @@ export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrolled = useSyncExternalStore(subscribeScroll, () => window.scrollY > 16, () => false);
-  // The homepage uses a minimal bar over the black hero; inner pages keep the floating pill.
-  const isHome = pathname === "/";
+  // Minimal bar on every page (the whole site is dark). The floating-pill branches below are kept for reference.
+  const isHome = true;
 
   return (
     // Fixed-height header: the pill shrinks inside it, so scrolling never shifts the page.

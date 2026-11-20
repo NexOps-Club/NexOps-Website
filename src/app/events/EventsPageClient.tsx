@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/EmptyState";
 import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import { eventsData } from "@/data/events";
+import { VERIFIED } from "@/lib/verified";
 import { EventCard } from "@/components/EventCard";
 import { EventRegisterModal } from "@/components/EventRegisterModal";
 import { LevelFilter, type LevelFilterValue } from "@/components/LevelFilter";
@@ -19,7 +20,8 @@ export default function EventsPage() {
 
   const categories = ["All", "Workshop", "Bootcamp", "Talk", "CTF"];
 
-  const filteredEvents = eventsData.filter((evt) => {
+  // Sample events stay hidden until src/data/events.ts holds verified listings (see src/lib/verified.ts).
+  const filteredEvents = (VERIFIED.events ? eventsData : []).filter((evt) => {
     const matchesStatus =
       statusTab === "all" ? true : evt.status === statusTab;
 
@@ -111,8 +113,12 @@ export default function EventsPage() {
       {filteredEvents.length === 0 ? (
         <EmptyState
           icon={Calendar}
-          title="No events found"
-          description="Try adjusting your search query or switching filters to see past sessions."
+          title={VERIFIED.events ? "No events found" : "No events announced yet"}
+          description={
+            VERIFIED.events
+              ? "Try adjusting your search query or switching filters to see past sessions."
+              : "New workshops, talks and CTFs will be listed here as soon as they are scheduled."
+          }
         />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

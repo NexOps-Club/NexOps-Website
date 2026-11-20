@@ -1,5 +1,5 @@
 const TONES: Record<string, string> = {
-  pending: "bg-amber-500/10 text-amber-700 border-amber-500/30",
+  pending: "bg-amber-500/10 text-amber-400 border-amber-500/30",
   reviewing: "bg-primary/10 text-brand border-primary/30",
   unread: "bg-primary/10 text-brand border-primary/30",
   accepted: "bg-accent/10 text-accent border-accent/30",

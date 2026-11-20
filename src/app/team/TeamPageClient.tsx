@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import Image from "next/image";
 import { teamData } from "@/data/team";
+import { VERIFIED } from "@/lib/verified";
 import { Mail, Sparkles, ArrowRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/Icons";
 import Link from "next/link";
@@ -144,7 +145,8 @@ export default function TeamPage() {
                 </div>
               )}
 
-              {/* Social Icons */}
+              {/* Social links stay hidden until verified */}
+              {VERIFIED.socialLinks && (
               <div className="pt-3 border-t border-ink/10 flex items-center gap-2">
                 {member.github && (
                   <a
@@ -178,6 +180,7 @@ export default function TeamPage() {
                   </a>
                 )}
               </div>
+              )}
             </div>
           </GlassCard>
         ))}

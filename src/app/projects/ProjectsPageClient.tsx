@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/EmptyState";
 import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import { projectsData } from "@/data/projects";
+import { VERIFIED } from "@/lib/verified";
 import {
   Code2,
   ExternalLink,
@@ -98,18 +99,20 @@ export default function ProjectsPage() {
               <span className="rounded bg-accent/10 border border-accent/30 px-2.5 py-0.5 text-xs font-mono text-accent">
                 {project.category}
               </span>
-              <div className="flex items-center gap-2 text-xs text-muted">
-                <span>Lead: {project.lead}</span>
-              </div>
+              {VERIFIED.projectDetails && (
+                <div className="flex items-center gap-2 text-xs text-muted">
+                  <span>Lead: {project.lead}</span>
+                </div>
+              )}
             </div>
 
             <div>
               <h3 className="text-lg font-bold text-ink group-hover:text-accent transition-colors">
                 {project.title}
               </h3>
-              <p className="mt-2 text-xs text-muted leading-relaxed">
-                {project.description}
-              </p>
+              {VERIFIED.projectDetails && (
+                <p className="mt-2 text-xs text-muted leading-relaxed">{project.description}</p>
+              )}
             </div>
 
             {/* Tech Stack Badges */}
@@ -124,7 +127,8 @@ export default function ProjectsPage() {
               ))}
             </div>
 
-            {/* Links */}
+            {/* Links stay hidden until repository and demo URLs are verified */}
+            {VERIFIED.projectDetails && (
             <div className="mt-auto pt-4 border-t border-ink/10 flex items-center justify-between text-xs">
               <a
                 href={project.githubUrl}
@@ -149,6 +153,7 @@ export default function ProjectsPage() {
                 </a>
               )}
             </div>
+            )}
             </div>
           </GlassCard>
         ))}

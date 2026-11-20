@@ -71,7 +71,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-canvas text-ink selection:bg-primary selection:text-on-primary">
+      <body className="dark-stage cinema min-h-full flex flex-col bg-canvas text-ink selection:bg-primary selection:text-on-primary">
         <AmbientBackground />
         <MotionProvider>
           <Navbar />

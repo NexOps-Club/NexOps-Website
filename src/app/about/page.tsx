@@ -4,6 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { GlassCard } from "@/components/GlassCard";
 import { PageHeader } from "@/components/PageHeader";
 import { siteConfig } from "@/config/site";
+import { VERIFIED } from "@/lib/verified";
 import { ShieldCheck, Terminal, Server, HeartHandshake, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = pageMetadata({
@@ -125,7 +126,8 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Timeline / Milestones */}
+      {/* Timeline / Milestones: invented history stays hidden until verified */}
+      {VERIFIED.aboutHistory && (
       <div className="space-y-8">
         <div className="text-center max-w-xl mx-auto space-y-2">
           <span className="text-xs font-mono uppercase tracking-wider text-accent font-semibold">Evolution</span>
@@ -142,6 +144,7 @@ export default function AboutPage() {
           ))}
         </div>
       </div>
+      )}
 
       {/* Bottom CTA */}
       <div className="text-center py-6">

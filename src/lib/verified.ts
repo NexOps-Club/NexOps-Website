@@ -14,6 +14,10 @@ export const VERIFIED = {
   projectDetails: false,
   /** Event listings in src/data/events.ts (titles, dates, venues, speakers). Currently sample data. */
   events: false,
+  /** Office hours and other hand-written contact details on the Contact page. */
+  contactDetails: false,
+  /** The invented club history timeline on the About page (founding year, homelab, placements). */
+  aboutHistory: false,
   /** Homelab hardware claims such as the "6-node" rack. */
   homelab: false,
 } as const;
