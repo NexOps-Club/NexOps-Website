@@ -51,8 +51,6 @@ export default function TeamPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       <PageHeader
-        icon={Sparkles}
-        badge="The People Behind the Terminals"
         title="Leadership & Core Team"
         description={
           <>
