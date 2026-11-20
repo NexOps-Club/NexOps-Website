@@ -20,7 +20,7 @@ interface CategoryOption {
 /** Member photo with an initials fallback if the remote image fails to load. */
 function MemberPhoto({ src, name }: { src: string; name: string }) {
   const [failed, setFailed] = useState(false);
-  if (failed) {
+  if (failed || !src) {
     return (
       <div
         role="img"
@@ -132,9 +132,11 @@ export default function TeamPage() {
                 <p className="text-[11px] text-muted">{member.yearOrDesignation}</p>
               </div>
 
-              <p className="text-xs text-muted leading-relaxed flex-1">
-                {member.bio}
-              </p>
+              {member.bio ? (
+                <p className="text-xs text-muted leading-relaxed flex-1">{member.bio}</p>
+              ) : (
+                <div className="flex-1" />
+              )}
 
               {/* Badges */}
               {member.badges && member.badges.length > 0 && (
