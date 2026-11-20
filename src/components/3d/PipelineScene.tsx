@@ -46,7 +46,6 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
-import { DOMAINS } from "@/data/domains";
 
 /*
  * Cinematic DevOps pipeline: an elevated, lit deck that carries data packets past three glass nodes
@@ -94,7 +93,6 @@ function glowTexture(alpha: number) {
 
 export default function PipelineScene({ selected, onSelect }: PipelineSceneProps) {
   const hostRef = useRef<HTMLDivElement>(null);
-  const labelRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const stateRef = useRef({ selected, onSelect });
 
   useEffect(() => {
@@ -454,7 +452,6 @@ export default function PipelineScene({ selected, onSelect }: PipelineSceneProps
     const onVis = () => (tabVisible = document.visibilityState === "visible");
     document.addEventListener("visibilitychange", onVis);
 
-    const v3 = new Vector3();
     let clock = 0;
     let last = performance.now();
     let raf = 0;
@@ -487,14 +484,6 @@ export default function PipelineScene({ selected, onSelect }: PipelineSceneProps
       underLights.forEach((l, i) => (l.intensity = 8 + Math.sin(clock * 0.7 + i) * 1.2));
       updatePackets(dt);
 
-      labelRefs.current.forEach((el, hub) => {
-        const c = cubes.find((cc) => cc.def.hub === hub);
-        if (!el || !c) return;
-        v3.copy(c.base).addScaledVector(c.U, -0.35).project(camera);
-        el.style.transform = `translate(${(v3.x * 0.5 + 0.5) * W - 14}px, ${(-v3.y * 0.5 + 0.5) * H + 12}px)`;
-        el.dataset.active = c.def.hub === sel || c.def.hub === hovered ? "1" : "0";
-      });
-
       composer.render();
     };
     raf = requestAnimationFrame(loop);
@@ -515,24 +504,5 @@ export default function PipelineScene({ selected, onSelect }: PipelineSceneProps
     };
   }, []);
 
-  return (
-    <div ref={hostRef} className="absolute inset-0">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        {DOMAINS.map((d) => (
-          <span
-            key={d.id}
-            ref={(el) => {
-              labelRefs.current[d.hub] = el;
-            }}
-            data-tone={d.tone}
-            data-active="0"
-            style={{ transform: "translate(-999px, -999px)" }}
-            className="domain-label absolute left-0 top-0"
-          >
-            {d.short}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
+  return <div ref={hostRef} className="absolute inset-0" />;
 }

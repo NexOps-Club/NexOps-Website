@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { DOMAINS } from "@/data/domains";
 import { useMotionPreference } from "@/contexts/MotionContext";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { StaticNetwork } from "@/components/3d/StaticNetwork";
@@ -26,8 +25,6 @@ function hasWebGL(): boolean {
   return webglSupport;
 }
 const noopSubscribe = () => () => {};
-
-const TONE_TEXT: Record<string, string> = { blue: "text-brand", cyan: "text-accent", violet: "text-accent-2" };
 
 interface CinematicHeroProps {
   /** Hub index of the locked-in domain, or null. */
@@ -57,8 +54,6 @@ export function CinematicHero({ selected, onSelect }: CinematicHeroProps) {
     const id = setTimeout(markReady, 300);
     return () => clearTimeout(id);
   }, [use3D]);
-
-  const domain = DOMAINS.find((d) => d.hub === selected) ?? null;
 
   return (
     <section
@@ -111,46 +106,18 @@ export function CinematicHero({ selected, onSelect }: CinematicHeroProps) {
         <StaticNetwork centered anchors selected={selected} onSelect={onSelect} className="h-full w-full" />
       </div>
 
-      {/* Domain selector, doubles as the keyboard path to the three nodes */}
-      <div className="relative z-10 mx-auto w-full max-w-[90rem] px-4 pb-8 pt-4 sm:px-8 lg:absolute lg:inset-x-0 lg:bottom-0 lg:px-14">
-        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
-          <div>
-            <div role="group" aria-label="Choose a domain" className="flex flex-wrap gap-2.5">
-              {DOMAINS.map((d) => {
-                const active = d.hub === selected;
-                return (
-                  <button
-                    key={d.id}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => onSelect(d.hub)}
-                    className={`rounded-full border px-4 py-2 font-mono text-xs transition ${
-                      active
-                        ? "border-ink/60 bg-ink/10 text-ink"
-                        : "border-line text-muted hover:border-ink/40 hover:text-ink"
-                    }`}
-                  >
-                    <span className={active ? "" : TONE_TEXT[d.tone]}>{d.short}</span>
-                    <span className="ml-2 hidden sm:inline">{d.name}</span>
-                  </button>
-                );
-              })}
-            </div>
-            <p aria-live="polite" className="mt-3 min-h-[3.25rem] max-w-md text-sm leading-relaxed text-muted">
-              {domain ? domain.analogy : "Select a domain to see what it covers."}
-            </p>
-          </div>
-          {siteConfig.recruitment.open && (
-            <Link
-              href="/join"
-              className="inline-flex items-center gap-2 font-mono text-xs text-subtle transition hover:text-ink"
-            >
-              <span aria-hidden="true" className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
-              Recruiting: {siteConfig.recruitment.label}
-            </Link>
-          )}
+      {/* Recruiting indicator: shown only when recruitment is open in src/config/site.ts */}
+      {siteConfig.recruitment.open && (
+        <div className="relative z-10 mx-auto flex w-full max-w-[90rem] justify-end px-4 pb-8 pt-4 sm:px-8 lg:absolute lg:inset-x-0 lg:bottom-0 lg:px-14">
+          <Link
+            href="/join"
+            className="inline-flex items-center gap-2 font-mono text-xs text-subtle transition hover:text-ink"
+          >
+            <span aria-hidden="true" className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
+            Recruiting: {siteConfig.recruitment.label}
+          </Link>
         </div>
-      </div>
+      )}
     </section>
   );
 }
