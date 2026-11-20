@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useEffect, useId, useRef, useState } from "react";
 import { EventItem } from "@/types";
 import { StatusMessage } from "@/components/StatusMessage";
@@ -111,8 +112,15 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 14, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.3 }}
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
@@ -266,8 +274,8 @@ export function EventRegisterModal({ event, onClose }: EventRegisterModalProps) 
             </form>
           </div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

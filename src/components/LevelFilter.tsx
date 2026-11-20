@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "motion/react";
+import { useId } from "react";
 import { LEVELS } from "@/data/levels";
 import type { EventLevel } from "@/types";
 
@@ -17,6 +19,7 @@ export function LevelFilter({ value, onChange, className = "" }: LevelFilterProp
     { id: "all", index: "00", label: "All Levels", hint: "Every workshop and event" },
     ...LEVELS,
   ];
+  const pillId = useId();
   const active = options.find((o) => o.id === value);
 
   return (
@@ -34,14 +37,21 @@ export function LevelFilter({ value, onChange, className = "" }: LevelFilterProp
               type="button"
               aria-pressed={on}
               onClick={() => onChange(o.id)}
-              className={`rounded-lg px-3 py-2 text-left sm:text-center text-xs transition ${
-                on
-                  ? "bg-primary text-on-primary font-semibold shadow-sm"
-                  : "text-ink-soft hover:bg-ink/10 hover:text-ink"
+              className={`relative rounded-lg px-3 py-2 text-left sm:text-center text-xs transition-colors ${
+                on ? "font-semibold text-on-primary" : "text-ink-soft hover:bg-ink/10 hover:text-ink"
               }`}
             >
-              <span className={`font-mono ${on ? "text-on-primary" : "text-brand"}`}>{o.index}{" // "}</span>
-              {o.label}
+              {on && (
+                <motion.span
+                  layoutId={pillId}
+                  className="absolute inset-0 rounded-lg bg-primary shadow-sm"
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                />
+              )}
+              <span className="relative">
+                <span className={`font-mono ${on ? "text-on-primary" : "text-brand"}`}>{o.index}{" // "}</span>
+                {o.label}
+              </span>
             </button>
           );
         })}

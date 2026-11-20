@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { MagneticLink } from "@/components/MagneticLink";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
@@ -92,13 +93,13 @@ export function CinematicHero({ selected, onSelect }: CinematicHeroProps) {
           NexOps is an engineering community exploring DevOps, Cloud Computing and Computer Networks through practical
           learning, experimentation and collaboration.
         </p>
-        <Link
+        <MagneticLink
           href="#domains"
           className="glass-pill pointer-events-auto mt-8 inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 font-mono text-[12.5px] font-medium tracking-[0.08em] text-ink active:scale-[0.97]"
         >
           EXPLORE NEXOPS
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        </MagneticLink>
       </div>
 
       {/* Small screens: interactive SVG network in place of the canvas */}

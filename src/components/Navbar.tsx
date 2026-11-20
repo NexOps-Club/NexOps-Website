@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useSyncExternalStore } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { siteConfig } from "@/config/site";
 import { Menu, X, ArrowRight } from "lucide-react";
 
@@ -15,6 +16,7 @@ function subscribeScroll(callback: () => void) {
 export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
   const scrolled = useSyncExternalStore(subscribeScroll, () => window.scrollY > 16, () => false);
   // Roadmaps sits in the action buttons on desktop, so it is left out of the link capsule.
   const desktopLinks = siteConfig.nav.filter((item) => item.href !== "/resources");
@@ -42,7 +44,14 @@ export function Navbar() {
           </Link>
 
           {/* Desktop links */}
-          <nav className="glass-pill hidden items-center gap-1 rounded-full p-1.5 lg:flex" aria-label="Main">
+          <nav
+            className="glass-pill hidden items-center gap-1 rounded-full p-1.5 lg:flex"
+            aria-label="Main"
+            onPointerLeave={() => setHovered(null)}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget)) setHovered(null);
+            }}
+          >
             {desktopLinks.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -50,13 +59,20 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`whitespace-nowrap rounded-full border px-4 py-1.5 text-sm transition-all duration-200 ${
-                    isActive
-                      ? "border-white/25 bg-white/15 text-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_4px_14px_-6px_rgb(96_165_250/0.5)]"
-                      : "border-transparent text-ink-soft hover:border-white/15 hover:bg-white/10 hover:text-ink"
+                  onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(item.href)}
+                  onFocus={() => setHovered(item.href)}
+                  className={`relative whitespace-nowrap rounded-full px-4 py-1.5 text-sm transition-colors duration-200 ${
+                    isActive || hovered === item.href ? "text-ink" : "text-ink-soft"
                   }`}
                 >
-                  {item.title}
+                  {(hovered ?? (isActive ? item.href : null)) === item.href && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      className="absolute inset-0 rounded-full border border-white/25 bg-white/15 shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_4px_14px_-6px_rgb(96_165_250/0.5)]"
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                  <span className="relative">{item.title}</span>
                 </Link>
               );
             })}
@@ -92,9 +108,13 @@ export function Navbar() {
         </div>
 
         {/* Mobile drawer: blurred sheet that overlays the page */}
+        <AnimatePresence>
         {mobileMenuOpen && (
-          <div
+          <motion.div
             id="mobile-menu"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8, transition: { duration: 0.14 } }}
             className="glass-drawer absolute inset-x-0 top-full border-b border-line px-4 pt-2 pb-5 sm:px-8 lg:hidden"
           >
             <div className="space-y-1">
@@ -134,8 +154,9 @@ export function Navbar() {
                 Admin Control Plane
               </Link>
             </div>
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     </header>
   );

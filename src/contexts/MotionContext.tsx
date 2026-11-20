@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionConfig } from "motion/react";
 import React, { createContext, useContext, useEffect, useSyncExternalStore } from "react";
 
 interface MotionContextType {
@@ -42,7 +43,9 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <MotionContext.Provider value={{ prefersReducedMotion, effectsOff }}>
-      {children}
+      <MotionConfig reducedMotion="user" transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}>
+        {children}
+      </MotionConfig>
     </MotionContext.Provider>
   );
 }
