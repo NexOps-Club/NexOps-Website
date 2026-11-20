@@ -10,6 +10,7 @@ export const teamData: TeamMember[] = [
     yearOrDesignation: "Associate Professor, HOD of AI&DS and AI&ML",
     bio: "",
     photoUrl: "",
+    github: "https://github.com/girishl",
   },
   {
     id: "naveen-s",
