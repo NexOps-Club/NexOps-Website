@@ -13,4 +13,15 @@ export const projectsData: ProjectItem[] = [
     lead: "Naveen S",
     featured: true,
   },
+  {
+    id: "k8s-autoscale-monitoring-demo",
+    title: "Kubernetes Autoscaling and Monitoring Demo",
+    description:
+      "A Kubernetes setup for a Python Flask app with CPU-based autoscaling, Prometheus metrics, a provisioned Grafana dashboard and zero-downtime rolling deployments, applied with a single kubectl command.",
+    category: "Infrastructure",
+    techStack: ["Kubernetes", "Prometheus", "Grafana", "Docker", "Flask", "Python"],
+    githubUrl: "https://github.com/Naveen4421/k8s-autoscale-monitoring-demo",
+    lead: "Naveen S",
+    featured: true,
+  },
 ];
